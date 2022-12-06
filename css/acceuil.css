@@ -6,6 +6,7 @@
 
 .madre{
     height: 100vh;
+    width: 100%;
     background-image: url(/img/Getty.jpg);
     background-repeat: no-repeat;
     background-size: cover;
