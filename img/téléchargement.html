@@ -1,0 +1,1266 @@
+<!doctype html>
+<html lang="fr-FR">
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+	<!-- SCRIPT CMP-->
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://cache.consentframework.com/js/pa/23752/c/Efeuu/stub" referrerpolicy="unsafe-url" charset="utf-8" defer></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://choices.consentframework.com/js/pa/23752/c/Efeuu/cmp" referrerpolicy="unsafe-url" charset="utf-8" async></script>
+	<!-- FIN CMP SCRIPT-->
+
+	<script type="rocketlazyloadscript" id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/7ebfbba122c38b2ac7f3e5140/69d9990cb5d251c4149523c63.js");</script>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.10 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Escroquerie supposée d&#039;Airtel Money à Mitzic : les clarifications de l&#039;opérateur -</title><style id="rocket-critical-css">.screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important}@font-face{font-display:swap;font-family:helveticaregular;src:url(https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/css/fonts/helvetica_0-webfont.eot);src:url(https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/css/fonts/helvetica_0-webfont.eot?#iefix) format('embedded-opentype'),url(https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/css/fonts/helvetica_0-webfont.woff) format('woff'),url(https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/css/fonts/helvetica_0-webfont.ttf) format('truetype'),url(https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/css/fonts/helvetica_0-webfont.svg#helveticaregular) format('svg');font-weight:400;font-style:normal}body{margin:0;padding:0}.sfsi_tool_tip_2 a{min-height:0!important}.sfsi_wicons{display:inline-block;color:#000}.sfsi_outr_div h2{color:#778088;font-family:helveticaregular;font-size:26px;margin:0 0 9px;padding:0;text-align:center;font-weight:400}.sfsi_outr_div ul li a{color:#5A6570;text-decoration:none}.sfsi_outr_div ul li{display:inline-block;list-style:none;margin:0;padding:0;float:none}.sfsi_outr_div li{float:left}.sfsi_tool_tip_2 .sfsi_inside div{min-height:0}.sfsi_tool_tip_2{background:#FFF;border:1px solid #e7e7e7;box-shadow:#e7e7e7 0 0 2px 1px;display:block;float:left;margin:0 0 0 -52px;padding:5px 14px 5px 14px;position:absolute;z-index:10000;border-bottom:#e5e5e5 solid 4px;width:100px}.sfsi_tool_tip_2{display:inline-table}.inerCnt,.inerCnt>a,.widget-area .widget a{outline:0}.sfsi_tool_tip_2 .bot_arow{background:url(https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/bot_tip_icn.png) no-repeat;position:absolute;bottom:-21px;left:50%;width:15px;height:21px;margin-left:-5px}.sfsiTlleft{bottom:100%;left:50%;margin-left:-66px;margin-bottom:2px}.inerCnt{position:relative;z-index:inherit!important;float:left;width:100%;float:left}.sfsi_wicons{margin-bottom:30px;position:relative;padding-top:5px}.fb_tool_bdr{width:68px;height:auto}.fb_tool_bdr .sfsi_inside{text-align:center;width:100%;float:left;overflow:hidden;margin-left:2px}.fb_tool_bdr .sfsi_inside .icon2{margin:2px 0 -2px -8px!important;height:auto;width:60px;display:inline-block;overflow:hidden}.fb_tool_bdr .sfsi_inside .icon3{margin:2px 0 2px 0;height:auto;width:62px;display:inline-block;float:none}.linkedin_tool_bdr,.twt_tool_bdr{bottom:100%;left:50%;margin-bottom:-12px}.fb_tool_bdr,.linkedin_tool_bdr,.twt_tool_bdr{bottom:100%;left:50%;margin-bottom:8px}.twt_tool_bdr .sfsi_inside{text-align:center;width:100%;float:left}.twt_tool_bdr .sfsi_inside .icon2{margin:3px 0px 2px 0px!important;display:inline-block;float:none;height:auto;width:58px}.linkedin_tool_bdr{width:66px}.linkedin_tool_bdr .sfsi_inside{text-align:center;float:left;width:100%}.linkedin_tool_bdr .sfsi_inside .icon2{margin:2px 19px 2px 0px;display:inline-block;float:none;width:100%}.twt_tool_bdr{width:62px;height:auto}@media (max-width:767px){.sfsi_outr_div{top:10%}.sfsi_outr_div h2{font-size:22px!important;line-height:28px}.sfsi_wicons{padding-top:0}}.sfsi_outr_div ul li .inerCnt{float:left}.sfsi_outr_div{position:fixed;width:100%;float:none;left:50%;top:20%;margin-left:-50%;opacity:0;z-index:-1;display:block;text-align:center}.sfsi_outr_div .sfsi_FrntInner_chg{display:inline-block;padding:15px 17px 27px 18px;background:#FFF;border:1px solid #EDEDED;box-shadow:0 0 5px #CCC;margin:20px;position:relative}.sfsi_FrntInner_chg .sfsiclpupwpr{position:absolute;right:-10px;top:-10px;width:25px}.sfsi_FrntInner_chg .sfsiclpupwpr img{width:auto;float:left;border:medium none}.sfsi_outr_div .sfsi_FrntInner_chg .sfsi_wicons{margin-bottom:0}.sfsi_outr_div ul{list-style:none;margin:0 0 24px;padding:0;text-align:center}.sfsi_FrntInner_chg ul li:first-of-type .sfsi_wicons{margin-left:0!important}.sfcm.sfsi_wicon{padding:0;width:100%;border:medium none}.sfsi_outr_div .sfsi_FrntInner_chg ul{margin:0 0 0 3px}.sfsi_outr_div .sfsi_FrntInner_chg ul li{margin:0 3px 0 0}.sfcm.sfsi_wicon{margin:-1px;padding:0}@media (min-width:320px) and (max-width:480px){.sfsi_tool_tip_2{padding:5px 14px 0}.sfsi_inside:last-child{margin-bottom:18px;clear:both}.sfsi_outr_div{top:10%}.sfsi_FrntInner_chg .sfsi_wicons{width:31px!important;height:31px!important}.sfsi_FrntInner_chg .sfsi_wicons img{width:100%}}@media (max-width:320px){.sfsi_tool_tip_2{padding:5px 14px 0}.sfsi_inside:last-child{margin-bottom:18px;clear:both}.sfsi_FrntInner_chg .sfsi_wicons{width:31px!important;height:31px!important}.sfsi_FrntInner_chg .sfsi_wicons img{width:100%}}.sfsi_wicons a.sficn,.sfsi_wicons .sfsi_inside a{box-shadow:none;border:none}.sfsi_wicons a{box-shadow:none!important}.linkedin_tool_bdr{line-height:0!important}.twt_tool_bdr{line-height:0!important}div#sfsiid_facebook{line-height:0!important}.sfsi_tool_tip_2 .sfsi_inside div:first-child{margin-top:0!important}.sfsi_tool_tip_2 .sfsi_inside div:last-child{margin-bottom:0!important}#sfsiid_facebook.sfsi_tool_tip_2 .sfsi_inside .icon2{margin:0 0 6px 0!important;height:20px;width:64px}#sfsiid_facebook.sfsi_tool_tip_2 .sfsi_inside .icon3{width:58px;margin-top:0!important}.sfsi_tool_tip_2 .sfsi_inside{margin-left:0;display:flex;flex-direction:column;align-items:center}.sfsi_tool_tip_2{border:0px;box-shadow:#86868654 0 0 25px 1px;border-radius:6px;padding:8px 12px 8px 12px}.sfsi_tool_tip_2::after{content:"";position:absolute;top:100%;left:0;width:100%;height:15px}.sfsi_tool_tip_2 .bot_arow{position:absolute;width:0;height:0;border-style:solid;border-width:5px 5px 0;border-color:#fff transparent transparent;bottom:-5px;background:none}.linkedin_tool_bdr .sfsi_inside .icon2{margin-right:0!important}.linkedin_tool_bdr .sfsi_inside .icon2{width:auto}:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--white:#fff;--gray:#6c757d;--gray-dark:#343a40;--primary:#007bff;--secondary:#6c757d;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f8f9fa;--dark:#343a40;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--font-family-sans-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,::after,::before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-ms-overflow-style:scrollbar}@-ms-viewport{width:device-width}aside,figure,header,main,nav,section{display:block}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}h1,h2,h3{margin-top:0;margin-bottom:.5rem}p{margin-top:0;margin-bottom:1rem}ul{margin-top:0;margin-bottom:1rem}ul ul{margin-bottom:0}a{color:#007bff;text-decoration:none;background-color:transparent;-webkit-text-decoration-skip:objects}figure{margin:0 0 1rem}img{vertical-align:middle;border-style:none}label{display:inline-block;margin-bottom:.5rem}button{border-radius:0}button,input,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,input{overflow:visible}button{text-transform:none}button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,button::-moz-focus-inner{padding:0;border-style:none}textarea{overflow:auto;resize:vertical}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}h1,h2,h3{margin-bottom:.5rem;font-family:inherit;font-weight:500;line-height:1.2;color:inherit}h1{font-size:2.5rem}h2{font-size:2rem}h3{font-size:1.75rem}.img-fluid{max-width:100%;height:auto}.container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}@media (min-width:576px){.container{max-width:540px}}@media (min-width:768px){.container{max-width:720px}}@media (min-width:992px){.container{max-width:960px}}@media (min-width:1200px){.container{max-width:1140px}}.row{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-15px;margin-left:-15px}.col-lg-4,.col-lg-8{position:relative;width:100%;min-height:1px;padding-right:15px;padding-left:15px}@media (min-width:992px){.col-lg-4{-webkit-box-flex:0;-ms-flex:0 0 33.333333%;flex:0 0 33.333333%;max-width:33.333333%}.col-lg-8{-webkit-box-flex:0;-ms-flex:0 0 66.666667%;flex:0 0 66.666667%;max-width:66.666667%}}.form-control{display:block;width:100%;padding:.375rem .75rem;font-size:1rem;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem}.form-control::-ms-expand{background-color:transparent;border:0}.form-control::-webkit-input-placeholder{color:#6c757d;opacity:1}.form-control::-moz-placeholder{color:#6c757d;opacity:1}.form-control:-ms-input-placeholder{color:#6c757d;opacity:1}.form-control::-ms-input-placeholder{color:#6c757d;opacity:1}.btn{display:inline-block;font-weight:400;text-align:center;white-space:nowrap;vertical-align:middle;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem}.collapse{display:none}.dropdown-toggle::after{display:inline-block;width:0;height:0;margin-left:.255em;vertical-align:.255em;content:"";border-top:.3em solid;border-right:.3em solid transparent;border-bottom:0;border-left:.3em solid transparent}.input-group{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;width:100%}.input-group>.form-control{position:relative;-webkit-box-flex:1;-ms-flex:1 1 auto;flex:1 1 auto;width:1%;margin-bottom:0}.input-group>.form-control:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.input-group-prepend{display:-webkit-box;display:-ms-flexbox;display:flex}.input-group-prepend .btn{position:relative;z-index:2}.input-group-prepend{margin-right:-1px}.input-group>.input-group-prepend>.btn{border-top-right-radius:0;border-bottom-right-radius:0}.input-group>.input-group-prepend:not(:first-child)>.btn{border-top-left-radius:0;border-bottom-left-radius:0}.navbar{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;padding:.5rem 1rem}.navbar-brand{display:inline-block;padding-top:.3125rem;padding-bottom:.3125rem;margin-right:1rem;font-size:1.25rem;line-height:inherit;white-space:nowrap}.navbar-nav{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;padding-left:0;margin-bottom:0;list-style:none}.navbar-collapse{-ms-flex-preferred-size:100%;flex-basis:100%;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.navbar-toggler{padding:.25rem .75rem;font-size:1.25rem;line-height:1;background-color:transparent;border:1px solid transparent;border-radius:.25rem}@media (min-width:992px){.navbar-expand-lg{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.navbar-expand-lg .navbar-nav{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}.navbar-expand-lg .navbar-collapse{display:-webkit-box!important;display:-ms-flexbox!important;display:flex!important;-ms-flex-preferred-size:auto;flex-basis:auto}.navbar-expand-lg .navbar-toggler{display:none}}.d-block{display:block!important}@media (min-width:992px){.d-lg-block{display:block!important}}.justify-content-center{-webkit-box-pack:center!important;-ms-flex-pack:center!important;justify-content:center!important}.align-items-center{-webkit-box-align:center!important;-ms-flex-align:center!important;align-items:center!important}.owl-carousel .owl-dots.disabled{display:none}ul{padding-left:20px}body,input,textarea{color:#555555;font:15px 'Roboto',sans-serif;line-height:1.4;word-wrap:break-word}body{background-color:#f4f4f4}.assistive-text,.screen-reader-text{position:absolute!important;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);height:1px;overflow:hidden;width:1px}#breadcrumb{border-bottom:1px solid rgba(0,0,0,0.1);background-color:#ffffff;padding:15px 0}#breadcrumb .breadcrumb-trail .trail-items{margin:0;padding:0}#breadcrumb ul li{list-style:none;display:inline-block}#breadcrumb ul li:after{content:'/';margin:0 4px}#breadcrumb ul li:last-child:after{content:normal}.btn,.btn-theme{font-size:15px;padding:8px 15px}.btn-theme{background-color:#c80000;color:#ffffff;text-align:center;white-space:nowrap;vertical-align:middle;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px}.back-to-top{position:fixed;bottom:70px;right:30px;z-index:10}.back-to-top a{width:40px;height:40px;display:block;background-color:#c80000;text-align:center;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;opacity:0.6;-moz-opacity:0.6;filter:alpha(opacity=60)}.back-to-top a:before{content:'\f106';color:#fff;font-family:'FontAwesome';-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-size:18px;line-height:40px}input[type="search"],textarea{-moz-appearance:none;-webkit-appearance:none;appearance:none}.form-control,input,textarea{font-size:15px;padding:10px;width:100%;box-shadow:none;color:#555555;border:1px solid rgba(0,0,0,0.09);background-color:#f9f9f9}.form-control::-webkit-input-placeholder{color:#555555;opacity:0.5;-moz-opacity:0.5;filter:alpha(opacity=50)}.form-control::-moz-placeholder{color:#555555;opacity:0.5;-moz-opacity:0.5;filter:alpha(opacity=50)}.form-control:-ms-input-placeholder{color:#555555;opacity:0.5;-moz-opacity:0.5;filter:alpha(opacity=50)}.form-control:-moz-placeholder{color:#555555;opacity:0.5;-moz-opacity:0.5;filter:alpha(opacity=50)}h1,h2,h3{line-height:1.3;margin-bottom:20px;color:#333333}figure{margin:0}img{max-width:100%;height:auto;vertical-align:top}a{color:#c80000}.container{max-width:1340px;padding-left:30px;padding-right:30px}.post-template-default .site-content .container{max-width:1340px}.site-title{font-size:40px;font-weight:700;margin:0}.site-title a{color:#333;text-decoration:none}.site-description{font-size:15px;margin:0;opacity:0.7;-moz-opacity:0.7;filter:alpha(opacity=70)}input.s{-webkit-border-radius:0;-moz-border-radius:0;-ms-border-radius:0;border-radius:0}.navigation-bar-top .search-toggle{display:none}.search-toggle:before{content:'\f002'}.search-form{margin-bottom:30px}.widget .search-form{margin-bottom:0}.search-form .form-control{border-right-width:0}.search-form .input-group-prepend{margin-right:0}.search-form .input-group-prepend .btn-theme{font-size:0;height:100%;padding-left:20px;padding-right:20px;min-height:43px;border:none}.search-form .input-group-prepend .btn-theme:before{font-family:'FontAwesome';-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;content:'\f002';font-size:16px;line-height:16px;top:50%;right:50%;margin-top:-8px;margin-right:-7px;position:absolute}.search-block{position:absolute;background-color:#ffffff;z-index:10000;right:30px;top:100%;display:none;width:420px;padding:10px;box-shadow:0 5px 10px rgba(0,0,0,0.2);-webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);-moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);-ms-box-shadow:0 5px 10px rgba(0,0,0,0.2)}.search-block .search-form{overflow:hidden;box-shadow:none;border-radius:0;margin:0}.search-block .form-control{font-size:15px;padding:10px;border:1px solid #cccccc;background-color:#fff}.search-block .input-group-prepend .btn-theme{padding:10px 25px;min-height:46px;z-index:10001}.search-block .input-group-prepend .btn-theme:before{font-size:16px;line-height:16px;margin-top:-8px;margin-right:-8px}.navbar{padding:0;background-color:#ffffff}.navbar .sticky-wrapper{height:auto!important}.navbar .sticky-wrapper .navigation-bar{width:100%!important}.navbar .sticky-wrapper:not(.is-sticky){padding-top:0!important}.navbar-head{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;padding-top:22px;padding-bottom:22px;background-size:cover;background-position:center center;background-repeat:no-repeat;position:relative}.navbar-head.navbar-bg-set,.navbar-head.navbar-bg-set .site-title,.navbar-head.navbar-bg-set .site-title a,.navbar-head.navbar-bg-set .site-description{color:#ffffff}.navbar-ad-section{text-align:right;padding-top:8px;padding-bottom:8px}.navbar .navbar-head .col-lg-4+.navbar-ad-section{margin-top:0}.navbar-ad-section .newscard-ad-728-90{display:inline-block}.navbar-head .navbar-head-row{-ms-flex-pack:justify;justify-content:space-between}.navigation-bar{background-color:#c80000;color:#ffffff;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;position:relative;z-index:999}.navigation-bar .container{position:relative;padding-right:85px}.navigation-bar-top{min-height:inherit;-webkit-box-flex:0;-ms-flex:0 0 100%;flex:0 0 100%;max-width:100%;-webkit-box-ordinal-group:3;-ms-flex-order:2;order:2}.navbar-brand{padding-top:8px;padding-bottom:8px;margin-right:0;white-space:normal}.navbar-main{-webkit-box-flex:0;-ms-flex:0 0 100%;flex:0 0 100%;max-width:100%;-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}.navbar .nav-search{position:absolute;top:0;right:30px;display:inline-block}.navbar-toggler{border:none;padding:10px 15px;color:#ffffff;border-radius:0;-webkit-border-radius:0;-moz-border-radius:0}.navbar-toggler:before{display:block;font-size:26px;content:'\f0c9';font-family:'FontAwesome';-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.navbar .navbar-collapse{flex-grow:0}.navbar .main-navigation ul{padding-left:0}.main-navigation li{position:relative;list-style:none;display:inline-block;float:left}.main-navigation a{color:#ffffff;display:block;padding:15px;font-weight:700}.main-navigation.nav-uppercase ul li a{text-transform:uppercase}.main-navigation.nav-uppercase li ul a{text-transform:inherit}.main-navigation ul li.menu-item-has-children>a{position:relative}.main-navigation ul li.menu-item-has-children>a:after{content:"\f0d7";font-family:fontawesome;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;position:absolute;top:50%;right:15px;font-size:18px;display:block;transform:translateY(-50%);-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);color:#ffffff}.main-navigation ul li.menu-item-has-children>a{padding-right:32px}.main-navigation .dropdown-parent .dropdown-toggle{width:40px;height:100%;color:#555555;position:absolute;top:0;right:0;font-size:18px;text-align:center;display:none}.main-navigation .dropdown-parent .dropdown-toggle:after{display:none}.main-navigation .dropdown-parent .dropdown-toggle .dropdown-icon{display:inline-block;position:relative;height:45px;width:45px}.main-navigation .dropdown-parent .dropdown-toggle .dropdown-icon:after{content:"\f105";font-family:fontawesome;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;position:absolute;top:50%;right:0;width:100%;height:auto;text-align:center;transform:translateY(-50%);-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);border:none;font-weight:bold;display:block}.main-navigation ul li ul li{display:block;float:none}.main-navigation ul li ul{display:none;z-index:9999}.main-navigation li ul{top:100%;border:1px solid rgba(0,0,0,0.1);border-radius:0;-webkit-border-radius:0;-moz-border-radius:0;padding-top:0;padding-bottom:0;position:absolute;left:0;z-index:999;background-color:#ffffff;margin-top:0;display:none;width:200px}.main-navigation li ul a{color:#555555;padding:8px 12px;text-transform:inherit;font-weight:normal}.main-navigation .dropdown-toggle:after{display:none}.search-toggle{display:block;font-family:'FontAwesome';-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#ffffff;padding:15px;min-width:45px;text-align:center}.search-toggle:before{content:"\f002"}.site-content{padding-top:30px}.post,.hentry{background-color:#ffffff;box-shadow:0 1px 1px rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(0,0,0,0.1);-moz-box-shadow:0 1px 1px rgba(0,0,0,0.1);margin-bottom:30px;padding:25px}.post-featured-image{margin-bottom:20px;position:relative}.post-featured-image.page-single-img-wrap{margin:-25px -25px 25px}.entry-title{font-size:28px;font-weight:700;color:#333333;margin:0 0 10px}.entry-meta{margin-bottom:10px}.entry-meta,.entry-meta a{color:#555555;font-size:14px}.entry-meta a{opacity:0.8;-moz-opacity:0.8;filter:alpha(opacity=80)}.entry-meta .author,.entry-meta .cat-links,.entry-meta .date,.entry-meta>div{display:inline-block;position:relative;margin-bottom:3px}.entry-meta>div:after{content:"/"}.entry-meta>.cat-links:after,.entry-meta>div:last-child:after{display:none}.entry-meta .cat-links a{color:#c80000;font-weight:700;text-transform:uppercase;margin-right:7px;float:left;opacity:1;-moz-opacity:1;filter:alpha(opacity=100)}.category-meta{opacity:1;-moz-opacity:1;filter:alpha(opacity=100)}.category-meta{margin-bottom:5px}.category-meta .cat-links{display:block;margin-bottom:0}.category-meta .cat-links a{margin-bottom:3px}.category-meta .cat-links:before,.category-meta .cat-links:after{content:"";display:table}.category-meta .cat-links:after,.entry-meta.category-meta>.cat-links:after,.entry-meta.category-meta>div:last-child:after{clear:both;display:table}.page-single-img-wrap{display:block;position:relative;overflow:hidden;background-color:#555555}.page-single-img-wrap:before{content:"";padding-top:60%;display:block}.page-single-img-wrap .post-img{position:absolute;top:0;left:0;right:0;bottom:0;background-size:cover;background-position:center center;background-repeat:no-repeat;transform:scale(1.006);-webkit-transform:scale(1.006);-moz-transform:scale(1.006)}.widget{margin-bottom:30px;padding:15px;position:relative;background-color:#ffffff;box-shadow:0 1px 1px rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(0,0,0,0.1);-moz-box-shadow:0 1px 1px rgba(0,0,0,0.1)}.widget-title{font-size:20px;padding-left:10px;border-left:4px solid #c80000;text-align:left;position:relative;font-weight:700;margin-bottom:15px}@media (max-width:1199px){h1{font-size:36px}h2{font-size:30px}h3{font-size:26px}}@media (max-width:991px){.navigation-bar .container{padding-right:30px}.navbar-ad-section{text-align:left}.navigation-bar-top{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}.navbar-main{-webkit-box-ordinal-group:3;-ms-flex-order:2;order:2;background-color:#fff}.navigation-bar-top .search-toggle{display:block;position:absolute;top:0;right:30px;bottom:0;font-size:16px;padding:10px;line-height:24px}.navigation-bar .nav-search{display:none}.navigation-bar-top .search-bar{background-color:#ffffff;box-shadow:inset 0 -1px 0 rgba(0,0,0,0.07);-webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,0.07);-moz-box-shadow:inset 0 -1px 0 rgba(0,0,0,0.07)}.search-block .input-group-prepend .btn-theme{padding-left:22px;padding-right:22px}.search-block{position:inherit;top:auto;right:auto;width:auto;padding-left:0;padding-right:0;box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none;background-color:transparent}.search-block.off{display:none!important}.navbar-collapse{margin-left:-30px;margin-right:-30px}.navbar .sticky-wrapper:not(.is-sticky) .navbar-collapse{max-height:none!important}.main-navigation{border-bottom:1px solid rgba(0,0,0,0.1)}.main-navigation li+li{border-top:1px solid rgba(0,0,0,0.1)}.main-navigation ul li a{color:#555555}.main-navigation ul li.menu-item-has-children>a{padding-right:45px}.main-navigation ul li.menu-item-has-children>a:after{content:"\f107";color:#555555;right:30px;font-weight:400;display:none}.main-navigation .dropdown-parent.menu-item-has-children>a{padding-right:80px}.main-navigation .dropdown-parent .dropdown-toggle{display:block;height:45px;width:80px}.main-navigation .dropdown-parent .sub-menu{display:none}.navbar-collapse .main-navigation ul li a{padding-top:12px;padding-bottom:12px}.main-navigation ul li a{padding-left:30px;padding-right:30px}.main-navigation ul li ul li a{padding-left:60px}.main-navigation li ul{position:relative;top:auto;left:auto;width:auto;display:block;border-width:1px 0 0}.main-navigation ul li ul{display:block}.main-navigation ul li ul{display:block}.widget-area .sticky-wrapper{height:auto!important}.widget-area .sticky-wrapper .sticky-sidebar{width:100%!important;position:relative!important;top:auto!important}}@media (max-width:767px){h1{font-size:32px}h2{font-size:28px}h3{font-size:25px}h1,h2,h3{margin-bottom:15px}.navbar-collapse{margin-left:-20px;margin-right:-20px}.main-navigation ul li.menu-item-has-children>a{padding-right:35px}.main-navigation ul li.menu-item-has-children>a:after{right:20px}.main-navigation .dropdown-parent.menu-item-has-children>a{padding-right:60px}.main-navigation .dropdown-parent .dropdown-toggle{width:60px}.main-navigation ul li a{padding-left:20px;padding-right:20px}.main-navigation ul li ul li a{padding-left:40px}.container{padding-left:20px;padding-right:20px}.site-title{font-size:30px}.navigation-bar .container{padding-right:20px}.navigation-bar-top .search-toggle{right:20px}.navbar-head,.navbar-head.navbar-bg-set{padding-top:8px;padding-bottom:8px}.navbar-brand{display:block}.post,.hentry{padding:15px}.post-featured-image.page-single-img-wrap{margin:-15px -15px 15px}.entry-title{font-size:25px}}@media (max-width:575px){h1{font-size:28px}h2{font-size:25px}h3{font-size:23px}h1,h2,h3{margin-bottom:10px}.navbar-collapse{margin-left:-15px;margin-right:-15px}.main-navigation ul li.menu-item-has-children>a{padding-right:30px}.main-navigation ul li.menu-item-has-children>a:after{right:15px}.main-navigation .dropdown-parent.menu-item-has-children>a{padding-right:50px}.main-navigation .dropdown-parent .dropdown-toggle{width:50px}.main-navigation ul li a{padding-left:15px;padding-right:15px}.main-navigation ul li ul li a{padding-left:30px}.container{padding-left:15px;padding-right:15px}.navigation-bar .container{padding-right:15px}.navigation-bar-top .search-toggle{right:15px}.back-to-top{right:15px}}</style><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto%3A300%2C300i%2C400%2C400i%2C500%2C500i%2C700%2C700i&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A300%2C300i%2C400%2C400i%2C500%2C500i%2C700%2C700i&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto%3A300%2C300i%2C400%2C400i%2C500%2C500i%2C700%2C700i&#038;display=swap" data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" /></noscript>
+	<link rel="canonical" href="https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/" />
+	<meta property="og:locale" content="fr_FR" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Escroquerie supposée d&#039;Airtel Money à Mitzic : les clarifications de l&#039;opérateur -" />
+	<meta property="og:description" content="Un article de presse, faisant mention d’une surfacturation des transactions Airtel Money par des revendeurs exerçant dans la zone de Mitzic, circule depuis quelques jours sur les réseaux sociaux. Airtel&hellip;" />
+	<meta property="og:url" content="https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/" />
+	<meta property="article:author" content="https://www.facebook.com/gabonactu.co" />
+	<meta property="article:published_time" content="2022-02-25T13:46:26+00:00" />
+	<meta property="article:modified_time" content="2022-02-25T13:48:49+00:00" />
+	<meta property="og:image" content="https://gabonactu.com/wp-content/uploads/2019/04/airtel-logo.jpg" />
+	<meta property="og:image:width" content="1826" />
+	<meta property="og:image:height" content="890" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Modérateur Modérateur" />
+	<meta name="twitter:label1" content="Écrit par" />
+	<meta name="twitter:data1" content="Modérateur Modérateur" />
+	<meta name="twitter:label2" content="Durée de lecture estimée" />
+	<meta name="twitter:data2" content="3 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/#article","isPartOf":{"@id":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/"},"author":{"name":"Modérateur Modérateur","@id":"https://gabonactu.com/#/schema/person/2ee72b47046ac6e2fc5e441a692af417"},"headline":"Escroquerie supposée d&rsquo;Airtel Money à Mitzic : les clarifications de l&rsquo;opérateur","datePublished":"2022-02-25T13:46:26+00:00","dateModified":"2022-02-25T13:48:49+00:00","mainEntityOfPage":{"@id":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/"},"wordCount":1323,"commentCount":0,"publisher":{"@id":"https://gabonactu.com/#organization"},"image":{"@id":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/#primaryimage"},"thumbnailUrl":"https://gabonactu.com/wp-content/uploads/2019/04/airtel-logo.jpg","keywords":["actualité gabonaise","Airtel Money","Ali Bongo Ondimba","Gabon","Gabon actu","gabon actualité","Gabon actualités","Gabonactu","Gabonactu.com","Gabonactualité","Libreville","Mitzic"],"articleSection":["Economie","Société"],"inLanguage":"fr-FR","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/#respond"]}]},{"@type":"WebPage","@id":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/","url":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/","name":"Escroquerie supposée d'Airtel Money à Mitzic : les clarifications de l'opérateur -","isPartOf":{"@id":"https://gabonactu.com/#website"},"primaryImageOfPage":{"@id":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/#primaryimage"},"image":{"@id":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/#primaryimage"},"thumbnailUrl":"https://gabonactu.com/wp-content/uploads/2019/04/airtel-logo.jpg","datePublished":"2022-02-25T13:46:26+00:00","dateModified":"2022-02-25T13:48:49+00:00","breadcrumb":{"@id":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/#breadcrumb"},"inLanguage":"fr-FR","potentialAction":[{"@type":"ReadAction","target":["https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/"]}]},{"@type":"ImageObject","inLanguage":"fr-FR","@id":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/#primaryimage","url":"https://gabonactu.com/wp-content/uploads/2019/04/airtel-logo.jpg","contentUrl":"https://gabonactu.com/wp-content/uploads/2019/04/airtel-logo.jpg","width":1826,"height":890,"caption":"Airtel Money / Gabonactu.com"},{"@type":"BreadcrumbList","@id":"https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Actualités","item":"https://gabonactu.com/actualites/"},{"@type":"ListItem","position":2,"name":"Escroquerie supposée d&rsquo;Airtel Money à Mitzic : les clarifications de l&rsquo;opérateur"}]},{"@type":"WebSite","@id":"https://gabonactu.com/#website","url":"https://gabonactu.com/","name":"","description":"Une véritable source d&#039;information","publisher":{"@id":"https://gabonactu.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://gabonactu.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"fr-FR"},{"@type":"Organization","@id":"https://gabonactu.com/#organization","name":"Gabonactu","url":"https://gabonactu.com/","logo":{"@type":"ImageObject","inLanguage":"fr-FR","@id":"https://gabonactu.com/#/schema/logo/image/","url":"https://gabonactu.com/wp-content/uploads/2021/09/Fichier-1.png","contentUrl":"https://gabonactu.com/wp-content/uploads/2021/09/Fichier-1.png","width":500,"height":500,"caption":"Gabonactu"},"image":{"@id":"https://gabonactu.com/#/schema/logo/image/"}},{"@type":"Person","@id":"https://gabonactu.com/#/schema/person/2ee72b47046ac6e2fc5e441a692af417","name":"Modérateur Modérateur","image":{"@type":"ImageObject","inLanguage":"fr-FR","@id":"https://gabonactu.com/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/7796e79f34591d9220c4787da0d7c7a9?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/7796e79f34591d9220c4787da0d7c7a9?s=96&d=mm&r=g","caption":"Modérateur Modérateur"},"sameAs":["https://gabonactu.com/","https://www.facebook.com/gabonactu.co"],"url":"https://gabonactu.com/author/yveslaugoma/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title=" &raquo; Flux" href="https://gabonactu.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title=" &raquo; Flux des commentaires" href="https://gabonactu.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title=" &raquo; Escroquerie supposée d&rsquo;Airtel Money à Mitzic : les clarifications de l&rsquo;opérateur Flux des commentaires" href="https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/feed/" />
+<!-- gabonactu.com is managing ads with Advanced Ads 1.37.2 --><!--noptimize--><script id="gabon-ready">
+			window.advanced_ads_ready=function(e,a){a=a||"complete";var d=function(e){return"interactive"===a?"loading"!==e:"complete"===e};d(document.readyState)?e():document.addEventListener("readystatechange",(function(a){d(a.target.readyState)&&e()}),{once:"interactive"===a})},window.advanced_ads_ready_queue=window.advanced_ads_ready_queue||[];		</script>
+		<!--/noptimize--><style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='preload'  href='https://gabonactu.com/wp-includes/css/dist/block-library/style.min.css?ver=6.1.1' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" type='text/css' media='all' />
+<link rel='preload'  href='https://gabonactu.com/wp-includes/css/classic-themes.min.css?ver=1' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" type='text/css' media='all' />
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='preload'  href='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/css/sfsi-style.css?ver=2.7.8' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" type='text/css' media='all' />
+<link rel='preload'  href='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/bootstrap/css/bootstrap.min.css?ver=4.0.0' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" type='text/css' media='all' />
+<link rel='preload'  href='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/font-awesome/css/font-awesome.css?ver=6.1.1' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" type='text/css' media='all' />
+
+<link rel='preload'  href='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/owl-carousel/owl.carousel.min.css?ver=2.3.4' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" type='text/css' media='all' />
+<link rel='preload'  href='https://gabonactu.com/wp-content/themes/newscard-pro/style.css?ver=6.1.1' data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" type='text/css' media='all' />
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.1' id='jquery-core-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js' defer></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/js/html5.js?ver=3.7.3' id='html5-js'></script>
+<![endif]-->
+<link rel="https://api.w.org/" href="https://gabonactu.com/wp-json/" /><link rel="alternate" type="application/json" href="https://gabonactu.com/wp-json/wp/v2/posts/80832" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://gabonactu.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://gabonactu.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 6.1.1" />
+<link rel='shortlink' href='https://gabonactu.com/?p=80832' />
+<link rel="alternate" type="application/json+oembed" href="https://gabonactu.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fgabonactu.com%2Fescroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://gabonactu.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fgabonactu.com%2Fescroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur%2F&#038;format=xml" />
+<meta name="follow.it-verification-code-a0RnalJMQUFFNVRuODJ1MTVmNFpLeWJZMUdNM3gxekM5UE1meldjL1hhYkxGajlzUFFqcTk5MVJXY3pKbkxpU3VucEplRm5hek9UcUJxb2pxOGo4aGpuTlh2MmdUOXZ6bjJlSG9obTAxdXlXMlVsd2Q3T0FHWEdLOGdmOWpkREV8RDhhVkNxSEdLdlo1UzB3SnZKOUM5UWttWWZ4U2hPcGtoME1LblE3eTlMWT0=" content="gZdh2JQwgyZW23QkMLJ6"/><link rel="pingback" href="https://gabonactu.com/xmlrpc.php">
+	<style type="text/css">
+				@media (min-width: 768px) {
+				}
+		/* Category Color > Afrique */
+				.entry-meta .cat-links a.cat-links-4,
+				.entry-meta .cat-links a.cat-links-4:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-4,
+				.post-boxed .entry-meta .cat-links a.cat-links-4:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-4,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-4:hover {
+					color: #a35700;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-4,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-4:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-4,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-4:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-4,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-4:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-4,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-4:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-4,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-4:hover {
+					background-color: #a35700;
+					color: #fff;
+				}
+			/* Category Color > Culture */
+				.entry-meta .cat-links a.cat-links-16,
+				.entry-meta .cat-links a.cat-links-16:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-16,
+				.post-boxed .entry-meta .cat-links a.cat-links-16:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-16,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-16:hover {
+					color: #dd8502;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-16,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-16:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-16,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-16:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-16,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-16:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-16,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-16:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-16,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-16:hover {
+					background-color: #dd8502;
+					color: #fff;
+				}
+			/* Category Color > Economie */
+				.entry-meta .cat-links a.cat-links-22,
+				.entry-meta .cat-links a.cat-links-22:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-22,
+				.post-boxed .entry-meta .cat-links a.cat-links-22:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-22,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-22:hover {
+					color: #4766a1;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-22,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-22:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-22,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-22:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-22,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-22:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-22,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-22:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-22,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-22:hover {
+					background-color: #4766a1;
+					color: #fff;
+				}
+			/* Category Color > Environnement */
+				.entry-meta .cat-links a.cat-links-26,
+				.entry-meta .cat-links a.cat-links-26:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-26,
+				.post-boxed .entry-meta .cat-links a.cat-links-26:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-26,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-26:hover {
+					color: #00a02a;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-26,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-26:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-26,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-26:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-26,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-26:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-26,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-26:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-26,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-26:hover {
+					background-color: #00a02a;
+					color: #fff;
+				}
+			/* Category Color > Health */
+				.entry-meta .cat-links a.cat-links-32,
+				.entry-meta .cat-links a.cat-links-32:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-32,
+				.post-boxed .entry-meta .cat-links a.cat-links-32:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-32,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-32:hover {
+					color: #81d742;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-32,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-32:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-32,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-32:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-32,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-32:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-32,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-32:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-32,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-32:hover {
+					background-color: #81d742;
+					color: #fff;
+				}
+			/* Category Color > Justice */
+				.entry-meta .cat-links a.cat-links-33,
+				.entry-meta .cat-links a.cat-links-33:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-33,
+				.post-boxed .entry-meta .cat-links a.cat-links-33:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-33,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-33:hover {
+					color: #ea6500;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-33,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-33:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-33,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-33:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-33,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-33:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-33,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-33:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-33,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-33:hover {
+					background-color: #ea6500;
+					color: #fff;
+				}
+			/* Category Color > Santé */
+				.entry-meta .cat-links a.cat-links-53,
+				.entry-meta .cat-links a.cat-links-53:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-53,
+				.post-boxed .entry-meta .cat-links a.cat-links-53:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-53,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-53:hover {
+					color: #75bc12;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-53,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-53:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-53,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-53:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-53,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-53:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-53,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-53:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-53,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-53:hover {
+					background-color: #75bc12;
+					color: #fff;
+				}
+			/* Category Color > Société */
+				.entry-meta .cat-links a.cat-links-57,
+				.entry-meta .cat-links a.cat-links-57:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-57,
+				.post-boxed .entry-meta .cat-links a.cat-links-57:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-57,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-57:hover {
+					color: #e84012;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-57,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-57:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-57,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-57:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-57,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-57:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-57,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-57:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-57,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-57:hover {
+					background-color: #e84012;
+					color: #fff;
+				}
+			/* Category Color > Sports */
+				.entry-meta .cat-links a.cat-links-58,
+				.entry-meta .cat-links a.cat-links-58:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-58,
+				.post-boxed .entry-meta .cat-links a.cat-links-58:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-58,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-58:hover {
+					color: #1f00ad;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-58,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-58:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-58,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-58:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-58,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-58:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-58,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-58:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-58,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-58:hover {
+					background-color: #1f00ad;
+					color: #fff;
+				}
+			/* Category Color > Tech */
+				.entry-meta .cat-links a.cat-links-26941,
+				.entry-meta .cat-links a.cat-links-26941:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-26941,
+				.post-boxed .entry-meta .cat-links a.cat-links-26941:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-26941,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-26941:hover {
+					color: #096abf;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-26941,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-26941:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-26941,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-26941:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-26941,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-26941:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-26941,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-26941:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-26941,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-26941:hover {
+					background-color: #096abf;
+					color: #fff;
+				}
+			/* Category Color > Technologie */
+				.entry-meta .cat-links a.cat-links-60,
+				.entry-meta .cat-links a.cat-links-60:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-60,
+				.post-boxed .entry-meta .cat-links a.cat-links-60:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-60,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-60:hover {
+					color: #096abf;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-60,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-60:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-60,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-60:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-60,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-60:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-60,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-60:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-60,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-60:hover {
+					background-color: #096abf;
+					color: #fff;
+				}
+			/* Category Color > Télécommunication */
+				.entry-meta .cat-links a.cat-links-62,
+				.entry-meta .cat-links a.cat-links-62:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-62,
+				.post-boxed .entry-meta .cat-links a.cat-links-62:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-62,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-62:hover {
+					color: #096abf;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-62,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-62:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-62,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-62:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-62,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-62:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-62,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-62:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-62,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-62:hover {
+					background-color: #096abf;
+					color: #fff;
+				}
+			/* Category Color > Tourisme */
+				.entry-meta .cat-links a.cat-links-64,
+				.entry-meta .cat-links a.cat-links-64:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-64,
+				.post-boxed .entry-meta .cat-links a.cat-links-64:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-64,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-64:hover {
+					color: #dd8604;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-64,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-64:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-64,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-64:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-64,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-64:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-64,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-64:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-64,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-64:hover {
+					background-color: #dd8604;
+					color: #fff;
+				}
+			/* Category Color > Transport */
+				.entry-meta .cat-links a.cat-links-65,
+				.entry-meta .cat-links a.cat-links-65:hover,
+				.post-boxed .entry-meta .cat-links a.cat-links-65,
+				.post-boxed .entry-meta .cat-links a.cat-links-65:hover,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-65,
+				.site-footer .widget-area .post-boxed .entry-meta .cat-links a.cat-links-65:hover {
+					color: #008957;
+				}
+				.post-img-wrap .entry-meta .cat-links a.cat-links-65,
+				.post-img-wrap .entry-meta .cat-links a.cat-links-65:hover,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-65,
+				.post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-65:hover,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-65,
+				.post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-65:hover,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-65,
+				.site-footer .widget-area .post-boxed .post-img-wrap .entry-meta .cat-links a.cat-links-65:hover,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-65,
+				.site-footer .widget-area .post-block .post-img-wrap + .entry-header .entry-meta .cat-links a.cat-links-65:hover {
+					background-color: #008957;
+					color: #fff;
+				}
+				</style>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async src="https://www.googletagmanager.com/gtag/js?id=UA-2602213-5"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2602213-5');
+</script>
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><link rel="icon" href="https://gabonactu.com/wp-content/uploads/2021/01/LOGO_GA-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="https://gabonactu.com/wp-content/uploads/2021/01/LOGO_GA.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://gabonactu.com/wp-content/uploads/2021/01/LOGO_GA.jpg" />
+<meta name="msapplication-TileImage" content="https://gabonactu.com/wp-content/uploads/2021/01/LOGO_GA.jpg" />
+<script type="rocketlazyloadscript">
+/*! loadCSS rel=preload polyfill. [c]2017 Filament Group, Inc. MIT License */
+(function(w){"use strict";if(!w.loadCSS){w.loadCSS=function(){}}
+var rp=loadCSS.relpreload={};rp.support=(function(){var ret;try{ret=w.document.createElement("link").relList.supports("preload")}catch(e){ret=!1}
+return function(){return ret}})();rp.bindMediaToggle=function(link){var finalMedia=link.media||"all";function enableStylesheet(){link.media=finalMedia}
+if(link.addEventListener){link.addEventListener("load",enableStylesheet)}else if(link.attachEvent){link.attachEvent("onload",enableStylesheet)}
+setTimeout(function(){link.rel="stylesheet";link.media="only x"});setTimeout(enableStylesheet,3000)};rp.poly=function(){if(rp.support()){return}
+var links=w.document.getElementsByTagName("link");for(var i=0;i<links.length;i++){var link=links[i];if(link.rel==="preload"&&link.getAttribute("as")==="style"&&!link.getAttribute("data-loadcss")){link.setAttribute("data-loadcss",!0);rp.bindMediaToggle(link)}}};if(!rp.support()){rp.poly();var run=w.setInterval(rp.poly,500);if(w.addEventListener){w.addEventListener("load",function(){rp.poly();w.clearInterval(run)})}else if(w.attachEvent){w.attachEvent("onload",function(){rp.poly();w.clearInterval(run)})}}
+if(typeof exports!=="undefined"){exports.loadCSS=loadCSS}
+else{w.loadCSS=loadCSS}}(typeof global!=="undefined"?global:this))
+</script>
+	<!-- SCRIPT GRAMICA -->
+		<script type="rocketlazyloadscript" data-rocket-type="application/javascript" src="https://ced.sascdn.com/tag/2136/smart.js" async></script>
+<script type="rocketlazyloadscript" data-rocket-type="application/javascript">
+    var sas = sas || {};
+    sas.cmd = sas.cmd || [];
+    sas.cmd.push(function() {
+        sas.setup({ networkid: 2136, domain: "https://www3.smartadserver.com", async: true });
+    });
+    sas.cmd.push(function() {
+        sas.call("onecall", {
+            siteId: 164269,
+            pageId: 826784,
+            formats: [
+                 { id: 45654 }
+,{ id: 45655 }
+,{ id: 45656 }
+,{ id: 45658 }
+,{ id: 49046 }
+,{ id: 49048 }
+,{ id: 53614 }
+,{ id: 92571 }
+,{ id: 94320 }
+            ],
+            target: ''
+        });
+    });
+</script>
+<!-- Fin script Gramica -->
+<script type="rocketlazyloadscript"> javascript:void(document.oncontextmenu=null); </script>
+</head>
+
+<body class="post-template-default single single-post postid-80832 single-format-standard wp-custom-logo theme-body sfsi_actvite_theme_flat group-blog aa-prefix-gabon-">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0.49803921568627" /><feFuncG type="table" tableValues="0 0.49803921568627" /><feFuncB type="table" tableValues="0 0.49803921568627" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 0.27843137254902" /><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0" /><feFuncG type="table" tableValues="0 0.64705882352941" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.78039215686275 1" /><feFuncG type="table" tableValues="0 0.94901960784314" /><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.44705882352941 0.4" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.098039215686275 1" /><feFuncG type="table" tableValues="0 0.66274509803922" /><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg>
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+	
+	<header id="masthead" class="site-header">
+				<nav class="navbar navbar-expand-lg d-block">
+			<div class="navbar-head navbar-bg-set"  style="background-image:url('http://gabonactu.com/wp-content/uploads/2021/01/header-bg.jpg');">
+				<div class="container">
+					<div class="row navbar-head-row align-items-center">
+						<div class="col-lg-4">
+							<div class="site-branding navbar-brand">
+								<a href="https://gabonactu.com/" class="custom-logo-link" rel="home"><img width="198" height="59" src="https://gabonactu.com/wp-content/uploads/2021/01/cropped-logo_gabonactu_website-Rouge-Transparent.png" class="custom-logo" alt="" decoding="async" /></a>									<h2 class="site-title"><a href="https://gabonactu.com/" rel="home"></a></h2>
+																	<p class="site-description">Une véritable source d&#039;information</p>
+															</div><!-- .site-branding .navbar-brand -->
+						</div>
+													<div class="col-lg-8 navbar-ad-section">
+																	<a href="https://www.gsez.com/" class="newscard-ad-728-90" target="_blank" rel="noopener noreferrer">
+																<img class="img-fluid" src="http://gabonactu.com/wp-content/uploads/2021/02/GSEZ_1024x128px_animation.gif" alt="Banner Add">
+																	</a>
+															</div>
+											</div><!-- .row -->
+				</div><!-- .container -->
+			</div><!-- .navbar-head -->
+			<div class="navigation-bar" id="sticky-navigation-bar">
+				<div class="navigation-bar-top">
+					<div class="container">
+						<button class="navbar-toggler menu-toggle" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"></button>
+						<span class="search-toggle"></span>
+					</div><!-- .container -->
+					<div class="search-bar">
+						<div class="container">
+							<div class="search-block off">
+								<form action="https://gabonactu.com/" method="get" class="search-form">
+	<label class="assistive-text"> Recherche </label>
+	<div class="input-group">
+		<input type="search" value="" placeholder="Recherche" class="form-control s" name="s">
+		<div class="input-group-prepend">
+			<button class="btn btn-theme">Recherche</button>
+		</div>
+	</div>
+</form><!-- .search-form -->
+							</div><!-- .search-box -->
+						</div><!-- .container -->
+					</div><!-- .search-bar -->
+				</div><!-- .navigation-bar-top -->
+				<div class="navbar-main">
+					<div class="container">
+						<div class="collapse navbar-collapse" id="navbarCollapse">
+							<div id="site-navigation" class="main-navigation nav-uppercase" role="navigation">
+								<ul class="nav-menu navbar-nav d-lg-block"><li id="menu-item-75472" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-75472"><a href="https://gabonactu.com/">accueil</a></li>
+<li id="menu-item-69759" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-69759"><a href="https://gabonactu.com/category/politique/">Politique</a></li>
+<li id="menu-item-69758" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-69758"><a href="https://gabonactu.com/category/economie/">Economie</a></li>
+<li id="menu-item-69833" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-69833"><a href="https://gabonactu.com/category/environnement/">Environnement</a></li>
+<li id="menu-item-69832" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-69832"><a href="https://gabonactu.com/category/culture/">Culture</a></li>
+<li id="menu-item-69834" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-69834"><a href="https://gabonactu.com/category/societe/">Société</a>
+<ul class="sub-menu">
+	<li id="menu-item-69835" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-69835"><a href="https://gabonactu.com/category/fait-divers/">Fait divers</a></li>
+</ul>
+</li>
+<li id="menu-item-69761" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-69761"><a href="https://gabonactu.com/category/sports/">Sports</a></li>
+<li id="menu-item-69760" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-69760"><a href="https://gabonactu.com/category/sante/">Santé</a></li>
+<li id="menu-item-72640" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-72640"><a href="https://gabonactu.com/category/annonces/">Annonces</a>
+<ul class="sub-menu">
+	<li id="menu-item-72600" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-72600"><a href="https://gabonactu.com/category/ventes/">Ventes</a></li>
+	<li id="menu-item-72601" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-72601"><a href="https://gabonactu.com/category/locations/">Locations</a></li>
+</ul>
+</li>
+<li id="menu-item-69762" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-69762"><a href="https://gabonactu.com/contact/">Contact</a></li>
+</ul>							</div><!-- #site-navigation .main-navigation -->
+						</div><!-- .navbar-collapse -->
+						<div class="nav-search">
+							<span class="search-toggle"></span>
+						</div><!-- .nav-search -->
+					</div><!-- .container -->
+				</div><!-- .navbar-main -->
+			</div><!-- .navigation-bar -->
+		</nav><!-- .navbar -->
+
+
+		
+		
+					<div id="breadcrumb">
+				<div class="container">
+					<div role="navigation" aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb"><ul class="trail-items" itemscope itemtype="http://schema.org/BreadcrumbList"><meta name="numberOfItems" content="3" /><meta name="itemListOrder" content="Ascending" /><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item trail-begin"><a href="https://gabonactu.com/" rel="home" itemprop="item"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item"><a href="https://gabonactu.com/category/economie/" itemprop="item"><span itemprop="name">Economie</span></a><meta itemprop="position" content="2" /></li><li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="trail-item trail-end"><span itemprop="name">Escroquerie supposée d&rsquo;Airtel Money à Mitzic : les clarifications de l&rsquo;opérateur</span><meta itemprop="position" content="3" /></li></ul></div>				</div>
+			</div><!-- .breadcrumb -->
+			</header><!-- #masthead -->
+	<div id="content" class="site-content ">
+		<div class="container">
+							<div class="row justify-content-center site-content-row">
+			<div id="primary" class="col-lg-8 content-area">		<main id="main" class="site-main">
+
+				<div class="post-80832 post type-post status-publish format-standard has-post-thumbnail hentry category-economie category-societe tag-actualite-gabonaise tag-airtel-money tag-ali-bongo-ondimba tag-gabon tag-gabon-actu tag-gabon-actualite tag-gabon-actualites tag-gabonactu tag-gabonactu-com tag-gabonactualite tag-libreville tag-mitzic">
+
+		
+					<figure class="post-featured-image page-single-img-wrap">
+						<div class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2019/04/airtel-logo.jpg');"></div>
+					</figure><!-- .post-featured-image .page-single-img-wrap -->
+
+				
+				<div class="entry-meta category-meta">
+					<div class="cat-links">
+				<a class="cat-links-22" href="https://gabonactu.com/category/economie/">Economie</a>
+			
+				<a class="cat-links-57" href="https://gabonactu.com/category/societe/">Société</a>
+			</div>
+				</div><!-- .entry-meta -->
+
+			
+					<header class="entry-header">
+				<h1 class="entry-title">Escroquerie supposée d&rsquo;Airtel Money à Mitzic : les clarifications de l&rsquo;opérateur</h1>
+									<div class="entry-meta">
+						<div class="date"><a href="https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/" title="Escroquerie supposée d&rsquo;Airtel Money à Mitzic : les clarifications de l&rsquo;opérateur">25 février 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>											</div><!-- .entry-meta -->
+								</header>
+		
+			<div class="entry-content">
+				
+<p></p>
+
+
+
+<p>Un article de presse, faisant mention d’une s<strong>urfacturation des transactions Airtel Money par des revendeurs exerçant dans la zone de Mitzic, circule depuis quelques jours sur les réseaux sociaux.</strong></p><div class="gabon-contenu_3" style="margin-left: auto; margin-right: auto; text-align: center; margin-bottom: 20px; " id="gabon-1494267213"><a href="https://gabonactu.com"><img loading="lazy" src="https://gabonactu.com/wp-content/uploads/2021/12/B1jpg.jpg" alt=""  srcset="https://gabonactu.com/wp-content/uploads/2021/12/B1jpg.jpg 1024w, https://gabonactu.com/wp-content/uploads/2021/12/B1jpg-300x75.jpg 300w, https://gabonactu.com/wp-content/uploads/2021/12/B1jpg-768x192.jpg 768w" sizes="(max-width: 1024px) 100vw, 1024px" width="1024" height="256"  style="display: inline-block;" /></a></div>
+
+
+
+<p>Airtel Money tient à rappeler à ses abonnés que les seuls frais autorisés sont ceux automatiquement prélevés sur chaque transaction suivant la grille des tarifs actuellement en vigueur et qu’ils ne doivent en aucun cas accepter de payer des frais additionnels.</p><div class="gabon-contenu" style="margin-left: auto; margin-right: auto; text-align: center; " id="gabon-2127594787"><div align="center" id="sas_49048" margin="auto" width="100%" height="100%">
+<script type="rocketlazyloadscript" data-rocket-type="application/javascript">
+    sas.cmd.push(function() {
+        sas.render("49048");  // Format : Pave 2 300x250
+    });
+</script>
+</div></div>
+
+
+
+<p>Aussi, Airtel Money invite tout abonné ayant été victime d’une surfacturation par un quelconque partenaire à le dénoncer auprès de ses services en vue d’un rappel à l’ordre et/ou d’une éventuelle sanction.</p>
+
+
+
+<p>Par ailleurs, Airtel Money rappelle à l’ensemble de ses revendeurs s’étant rendus coupables de faits cités plus haut qu’il se réserve le droit de résilier leur contrat et d’engager des poursuites judiciaires en cas de non-respect/violation des termes de la convention liant les deux parties.</p>
+
+
+
+<p>La Direction Airtel Money</p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td><strong>GRILLE TARIFAIRE DES TRANSACTIONS AIRTEL MONEY</strong><strong></strong></td></tr><tr><td>&nbsp; <strong>INTERVALLE DES TRANSACTIONS (F CFA)</strong><strong></strong></td><td>&nbsp; <strong>DÉPÔT D’ESPÈCES &amp; ACHATS DE CRÉDIT DE </strong><strong>COMMUNICATION</strong><strong></strong></td><td>&nbsp; &nbsp; <strong>RETRAIT D&rsquo;ESPÈCES</strong><strong></strong></td><td>&nbsp; &nbsp; <strong>PAIEMENT DANS UN COMMERCE</strong><strong></strong></td><td><strong>TRANSFERT D’ARGENT</strong><strong></strong></td></tr><tr><td>&nbsp; <strong>VERS UN NUMÉRO AYANT UN COMPTE</strong><strong></strong></td><td><strong>VERS UN NUMÉRO N&rsquo;AYANT PAS DE COMPTE OU DE LA CONCURRENCE</strong><strong></strong></td></tr><tr><td>100</td><td>1 000</td><td>&nbsp; &nbsp; &nbsp; <strong>GRATUIT</strong><strong></strong></td><td>3%</td><td>10</td><td>10</td><td>&nbsp; &nbsp; &nbsp; &nbsp; <strong>1% DU MONTANT DE LA TRANSACTION</strong><strong></strong></td></tr><tr><td>1 001</td><td>5 000</td><td>3%</td><td>50</td><td>50</td></tr><tr><td>5 001</td><td>10 000</td><td>3%</td><td>100</td><td>100</td></tr><tr><td>10 001</td><td>20 000</td><td>3%</td><td>150</td><td>150</td></tr><tr><td>20 001</td><td>30 000</td><td>3%</td><td>200</td><td>200</td></tr><tr><td>30 001</td><td>40 000</td><td>3%</td><td>250</td><td>250</td></tr><tr><td>40 001</td><td>50 000</td><td>3%</td><td>300</td><td>300</td></tr><tr><td>50 001</td><td>60 000</td><td>3%</td><td>350</td><td>350</td></tr><tr><td>60 001</td><td>70 000</td><td>3%</td><td>400</td><td>400</td></tr><tr><td>70 001</td><td>80 000</td><td>3%</td><td>450</td><td>450</td></tr><tr><td>80 001</td><td>90 000</td><td>3%</td><td>500</td><td>500</td></tr><tr><td>90 001</td><td>100 000</td><td>3%</td><td>550</td><td>550</td></tr><tr><td>100 001</td><td>150 000</td><td>3%</td><td>600</td><td>600</td></tr><tr><td>150 001</td><td>166 670</td><td>3%</td><td>650</td><td>650</td></tr><tr><td>166 671</td><td>250 000</td><td>5000</td><td>700</td><td>700</td></tr><tr><td>250 001</td><td>300 000</td><td>5000</td><td>750</td><td>750</td></tr><tr><td>300 001</td><td>350 000</td><td>5000</td><td>800</td><td>800</td></tr><tr><td>350 001</td><td>400 000</td><td>5000</td><td>850</td><td>850</td></tr><tr><td>400 001</td><td>450 000</td><td>5000</td><td>900</td><td>900</td></tr><tr><td>450 001</td><td>500 000</td><td>5000</td><td>1000</td><td>1000</td></tr></tbody></table></figure>
+
+
+
+<h1>INFORMATIONS DIVERSES</h1>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td>Ouverture du <strong>compte</strong><strong></strong></td><td><strong>GRATUIT</strong><strong></strong></td></tr><tr><td>Changement <strong>mot de passe</strong><strong></strong></td><td><strong>GRATUIT</strong><strong></strong></td></tr><tr><td>Consultation <strong>Solde</strong><strong></strong></td><td><strong>GRATUIT</strong><strong></strong></td></tr><tr><td>Rapports des <strong>transactions</strong><strong></strong></td><td><strong>10 F</strong><strong></strong></td></tr><tr><td>Demande <strong>d&rsquo;annulation d&rsquo;une transaction</strong><strong></strong></td><td><strong>200 F</strong><strong></strong></td></tr><tr><td>Achat de <strong>crédit de communication&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GRATUIT</strong><strong></strong></td></tr><tr><td>Achat de forfait airtel <strong>( Internet &amp; Appels)</strong><strong></strong></td><td><strong>GRATUIT</strong><strong></strong></td></tr><tr><td>Achat Unités <strong>Edan</strong><strong></strong></td><td><strong>100 F</strong><strong></strong></td></tr><tr><td>Paiement de facture <strong>SEEG (Eau et Electricité)</strong><strong></strong></td><td><strong>100 F</strong><strong></strong></td></tr><tr><td>Réabonnement <strong>CANAL+ &amp; CANALBOX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><strong>GRATUIT</strong><strong></strong></td></tr><tr><td>Réabonnement <strong>SATCON</strong><strong></strong></td><td><strong>GRATUIT</strong><strong></strong></td></tr><tr><td>Achat forfait <strong>IPI9</strong><strong></strong></td><td><strong>100 F</strong><strong></strong></td></tr><tr><td>Souscription <strong>Airtel Prévoyance</strong><strong></strong></td><td><strong>500 F</strong><strong></strong></td></tr></tbody></table></figure>
+
+
+
+<p><strong>TRANSACTIONS BANCAIRES</strong><strong></strong></p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td>Transfert d&rsquo;argent du compte Airtel Money vers le <strong>compte bancaire</strong><strong></strong></td><td><strong>2,5% ( PLAFONNÉ À 5000F )</strong><strong></strong></td></tr><tr><td>Transfert d&rsquo;argent du compte bancaire vers le compte <strong>Airtel Money</strong><strong></strong></td><td><strong>FRAIS VARIANT SELON LA BANQUE</strong><strong></strong></td></tr><tr><td>Consultation de <strong>solde bancaire&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50 F</strong><strong></strong></td></tr><tr><td>Rapports des <strong>transactions</strong><strong></strong></td><td><strong>100 F</strong><strong></strong></td></tr></tbody></table></figure>
+
+
+
+<p><strong>PLAFONDS DES TRANSACTIONS AIRTEL MONEY</strong><strong></strong></p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td>Solde maximum</td><td><strong>5 000 000 F</strong><strong></strong></td></tr><tr><td>Valeur maximale de retrait par transaction</td><td><strong>500 000 F</strong><strong></strong></td></tr><tr><td>Plafond de retrait par jour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>750 000 F</strong><strong></strong></td></tr><tr><td>Plafond de transfert par jour</td><td><strong>1 500 000 F</strong><strong></strong></td></tr><tr><td>Plafond de paiement par jour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>2 500 000 F</strong><strong></strong></td></tr><tr><td>Plafond de transactions par jour (Retrait + Transfert+ Paiement)</td><td><strong>3 000 000 F</strong><strong></strong></td></tr><tr><td>Plafond de transactions par semaine (Retrait + Transfert+ Paiement)</td><td><strong>5 000 000 F</strong><strong></strong></td></tr><tr><td>Plafond de transactions par mois (Retrait + Transfert+ Paiement)</td><td><strong>10 000 000 F</strong><strong></strong></td></tr></tbody></table></figure>
+
+
+
+<p>RAPIDE. SÉCURISÉ. SANS FRONTIÈRES.</p>
+<div class='sfsi_Sicons sfsi_Sicons_position_left' style='width: 100%; display: inline-block; vertical-align: middle; text-align:left'><div style='margin:0px 8px 0px 0px; line-height: 24px'><span></span></div><div class='sfsi_socialwpr'><div class='sf_subscrbe sf_icon' style='text-align:left;vertical-align: middle;float:left;width:auto'><a href="https://api.follow.it/widgets/icon/a0RnalJMQUFFNVRuODJ1MTVmNFpLeWJZMUdNM3gxekM5UE1meldjL1hhYkxGajlzUFFqcTk5MVJXY3pKbkxpU3VucEplRm5hek9UcUJxb2pxOGo4aGpuTlh2MmdUOXZ6bjJlSG9obTAxdXlXMlVsd2Q3T0FHWEdLOGdmOWpkREV8RDhhVkNxSEdLdlo1UzB3SnZKOUM5UWttWWZ4U2hPcGtoME1LblE3eTlMWT0=/OA==/" target="_blank"><img src="https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/visit_icons/Follow/icon_Follow_en_US.png" alt="error" /></a></div><div class='sf_fb_share sf_icon' style='text-align:left;vertical-align: middle;'><a  target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/' style='display:inline-block;'><img class='sfsi_wicon'  data-pin-nopin='true' alt='fb-share-icon' title='Facebook Share' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/share_icons/fb_icons/en_US.svg' /></a></div><div class='sf_twiter sf_icon' style='display: inline-block;vertical-align: middle;width: auto;margin-left: 7px;'>
+						<a target='_blank' href='https://twitter.com/intent/tweet?text=Escroquerie+suppos%C3%A9e+d%26rsquo%3BAirtel+Money+%C3%A0+Mitzic+%3A+les+clarifications+de+l%26rsquo%3Bop%C3%A9rateur+https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/'style='display:inline-block' >
+							<img data-pin-nopin= true class='sfsi_wicon' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/share_icons/Twitter_Tweet/en_US_Tweet.svg' alt='Tweet' title='Tweet' >
+						</a>
+					</div></div></div><div class="gabon-apres-le-contenu" style="margin-left: auto; margin-right: auto; text-align: center; " id="gabon-883172074"><div align="center" id="sas_92571">
+<script type="rocketlazyloadscript" data-rocket-type="application/javascript">
+    sas.cmd.push(function() {
+        sas.render("92571");  // Format : Native Ad 0x0
+    });
+</script>
+</div></div><div class="gabon-apres-le-contenu_2" style="margin-left: auto; margin-right: auto; text-align: center; margin-top: 4px; " id="gabon-808092362"><a href="https://www.gabonactu.com/"><img loading="lazy" src="https://gabonactu.com/wp-content/uploads/2021/09/gif-Gabonactu.gif" alt=""  width="728" height="104"  style="display: inline-block;" /></a></div>			</div><!-- .entry-content -->
+
+		<footer class="entry-meta"><span class="tag-links"><span class="label">Tags:</span> <a href="https://gabonactu.com/tag/actualite-gabonaise/" rel="tag">actualité gabonaise</a>, <a href="https://gabonactu.com/tag/airtel-money/" rel="tag">Airtel Money</a>, <a href="https://gabonactu.com/tag/ali-bongo-ondimba/" rel="tag">Ali Bongo Ondimba</a>, <a href="https://gabonactu.com/tag/gabon/" rel="tag">Gabon</a>, <a href="https://gabonactu.com/tag/gabon-actu/" rel="tag">Gabon actu</a>, <a href="https://gabonactu.com/tag/gabon-actualite/" rel="tag">gabon actualité</a>, <a href="https://gabonactu.com/tag/gabon-actualites/" rel="tag">Gabon actualités</a>, <a href="https://gabonactu.com/tag/gabonactu/" rel="tag">Gabonactu</a>, <a href="https://gabonactu.com/tag/gabonactu-com/" rel="tag">Gabonactu.com</a>, <a href="https://gabonactu.com/tag/gabonactualite/" rel="tag">Gabonactualité</a>, <a href="https://gabonactu.com/tag/libreville/" rel="tag">Libreville</a>, <a href="https://gabonactu.com/tag/mitzic/" rel="tag">Mitzic</a></span><!-- .tag-links --></footer><!-- .entry-meta -->	</div><!-- .post-80832 -->
+
+	<nav class="navigation post-navigation" aria-label="Publications">
+		<h2 class="screen-reader-text">Navigation de l’article</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://gabonactu.com/le-prd-peaufine-sa-strategie-pour-conquerir-le-terrain-en-2023/" rel="prev">Le PRD peaufine sa stratégie pour conquérir le terrain en 2023</a></div><div class="nav-next"><a href="https://gabonactu.com/plus-de-250-etudiants-du-groupe-em-gabon-universite-recoivent-leurs-diplomes-et-grades/" rel="next">Plus de 250 étudiants  du Groupe EM Gabon Université reçoivent leurs diplômes et grades</a></div></div>
+	</nav>
+<div id="comments" class="comments-area">
+
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Laisser un commentaire <small><a rel="nofollow" id="cancel-comment-reply-link" href="/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/#respond" style="display:none;">Annuler la réponse</a></small></h3><form action="https://gabonactu.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Votre adresse e-mail ne sera pas publiée.</span> <span class="required-field-message">Les champs obligatoires sont indiqués avec <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Commentaire <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required></textarea></p><p class="comment-form-author"><label for="author">Nom <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required /></p>
+<p class="comment-form-email"><label for="email">E-mail <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required /></p>
+<p class="comment-form-url"><label for="url">Site web</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" autocomplete="url" /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Enregistrer mon nom, mon e-mail et mon site dans le navigateur pour mon prochain commentaire.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Laisser un commentaire" /> <input type='hidden' name='comment_post_ID' value='80832' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="672d09c60a" /></p><p style="display: none !important;"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="66"/><script type="rocketlazyloadscript">document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+<aside id="secondary" class="col-lg-4 widget-area" role="complementary">
+	<div class="sticky-sidebar">
+		<section id="search-2" class="widget widget_search"><form action="https://gabonactu.com/" method="get" class="search-form">
+	<label class="assistive-text"> Recherche </label>
+	<div class="input-group">
+		<input type="search" value="" placeholder="Recherche" class="form-control s" name="s">
+		<div class="input-group-prepend">
+			<button class="btn btn-theme">Recherche</button>
+		</div>
+	</div>
+</form><!-- .search-form -->
+</section><section id="custom_html-11" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div align="center">
+<img class="aligncenter size-full wp-image-86721" src="https://gabonactu.com/wp-content/uploads/2022/10/BANDEAU_GABACTU.gif" alt="" width="700" height="900" />
+
+<img loading="lazy" class="aligncenter size-full wp-image-83888" src="https://gabonactu.com/wp-content/uploads/2022/06/Gabon-Actu-1_500x600.jpg" alt="" width="500" height="600" srcset="https://gabonactu.com/wp-content/uploads/2022/06/Gabon-Actu-1_500x600.jpg 500w, https://gabonactu.com/wp-content/uploads/2022/06/Gabon-Actu-1_500x600-250x300.jpg 250w" sizes="(max-width: 500px) 100vw, 500px">
+
+<br>
+<div align="center">
+<a href="https://www.canalplus-afrique.com/ga/mycanal" target="_blank" rel="noopener"><img class="alignnone size-medium wp-image-79862" src="https://gabonactu.com/wp-content/uploads/2022/02/Vignette-WEB-mycanal-300x300px.png" alt="" width="500" height="500" /></a>
+
+<br><br>
+&nbsp;
+<div align="center"><a href="https://gabonactu.com/category/annonces/" target="_blank" rel="noopener"><img src="https://gabonactu.com/wp-content/uploads/2021/06/gabonpub.gif" alt="" width="300" height="135" /></a></div></div></section><section id="block-2" class="widget widget_block widget_media_video">
+<figure class="wp-block-video"><video autoplay controls muted src="https://gabonactu.com/wp-content/uploads/2021/09/WhatsApp-Video-2021-09-23-at-08.59.15.mp4"></video></figure>
+</section><section id="custom_html-4" class="widget_text widget widget_custom_html"><h3 class="widget-title">PUBLICITÉ</h3><div class="textwidget custom-html-widget"><div align="center">
+<img src="https://gabonactu.com/wp-content/uploads/2021/07/WhatsApp-Video-2021-07-02-at-18.18.30.gif" alt="image" width="500" /></div><br>
+&nbsp;
+<div>
+<a href="https://sobraga.net/" target="_blank" rel="noopener">
+<img src="https://gabonactu.com/wp-content/uploads/2021/02/image008-300x113.png" alt="image" width="500" height="500" /></a>
+</div>
+&nbsp;
+<div align="center">
+
+</div>
+
+<br>
+<div id="sas_45655" align="center"></div>
+<script type="rocketlazyloadscript" data-rocket-type="application/javascript">
+    sas.cmd.push(function() {
+        sas.render("45655");  // Format : Pave 1 300x250
+    });
+</script>
+
+<!-- ****** SCRIPT GRAMICA *******-->
+<div id="sas_45654" align="center"></div>
+<script type="rocketlazyloadscript" data-rocket-type="application/javascript">
+    sas.cmd.push(function() {
+        sas.render("45654");  // Format : GrandAngle 300x600
+    });
+</script>
+<!-- ****** FIN SCRIPT GRAMICA *******-->
+<div align="center"><img src="https://www.gabonactu.com/wp-content/uploads/2020/03/SNI-GMT-323X281.gif" alt="image" width="500" /></div>
+<div align="center"><img src="http://gabonactu.com/wp-content/uploads/2021/02/323x281-GMT-NESCAFE.gif" alt="image" width="500" /></div>
+<!-- ******
+<div align="center">
+<img src="https://gabonactu.com/wp-content/uploads/2020/06/GAB-Banners-300px-x-250-px1.png" alt="image" width='500'></div>
+*******-->
+
+<!-- ******
+<div align="center"><a href="https://groupebgfibank.com/" target="_blank" rel="noopener"><img src="https://www.gabonactu.com/wp-content/uploads/2019/10/Les-MAF-web_300-250px.png" alt="image" width='400' height='500'></a></div>
+*******-->
+<div align="center"><a href="https://www.facebook.com/vivianne.ngobambou/" target="_blank" rel="noopener"><img src="https://www.gabonactu.com/wp-content/uploads/2019/11/vi_vi_pub-1.gif" alt="image" width="500" /></a></div>
+</div></section><section id="block-3" class="widget widget_block widget_text">
+<p></p>
+</section>	</div><!-- .sticky-sidebar -->
+</aside><!-- #secondary -->
+					</div><!-- row -->
+		</div><!-- .container -->
+	</div><!-- #content .site-content-->
+			<footer id="colophon" class="site-footer" role="contentinfo">
+			
+				<section class="featured-stories post-slider boxed-layout">
+					<div class="container">
+													<div class="post-slider-header">
+													<h2 class="stories-title">Vous pourriez l&#039;avoir manquer</h2>
+													</div><!-- .post-slider-header -->
+						
+						
+						<div class="owl-carousel owl-carousel-default">
+															<div class="post-col">
+									<div class="post-boxed">
+																					<div class="post-img-wrap">
+												<a href="https://gabonactu.com/black-friday-afrijet-casse-les-prix-sur-tous-ses-vols/" class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2022/06/Afrijet.jpg');"></a>
+												<div class="entry-meta category-meta">
+													<div class="cat-links">
+				<a class="cat-links-22" href="https://gabonactu.com/category/economie/">Economie</a>
+			
+				<a class="cat-links-65" href="https://gabonactu.com/category/transport/">Transport</a>
+			</div>
+												</div><!-- .entry-meta -->
+											</div><!-- .post-img-wrap -->
+																				<div class="post-content">
+																						<h3 class="entry-title"><a href="https://gabonactu.com/black-friday-afrijet-casse-les-prix-sur-tous-ses-vols/">Black Friday : Afrijet casse les prix sur tous ses vols !</a></h3>																							<div class="entry-meta">
+													<div class="date"><a href="https://gabonactu.com/black-friday-afrijet-casse-les-prix-sur-tous-ses-vols/" title="Black Friday : Afrijet casse les prix sur tous ses vols !">16 novembre 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>												</div>
+																					</div><!-- .post-content -->
+									</div><!-- .post-boxed -->
+								</div>
+															<div class="post-col">
+									<div class="post-boxed">
+																					<div class="post-img-wrap">
+												<a href="https://gabonactu.com/maganga-moussavou-et-le-rhm-evincent-le-pdg-a-la-cour-constitutionnelle/" class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2020/01/PR-RENTREE.COUR_.CONST-2-2-scaled-1.jpg');"></a>
+												<div class="entry-meta category-meta">
+													<div class="cat-links">
+				<a class="cat-links-49" href="https://gabonactu.com/category/politique/">Politique</a>
+			</div>
+												</div><!-- .entry-meta -->
+											</div><!-- .post-img-wrap -->
+																				<div class="post-content">
+																						<h3 class="entry-title"><a href="https://gabonactu.com/maganga-moussavou-et-le-rhm-evincent-le-pdg-a-la-cour-constitutionnelle/">Maganga Moussavou et le RHM évincent le PDG à la Cour constitutionnelle</a></h3>																							<div class="entry-meta">
+													<div class="date"><a href="https://gabonactu.com/maganga-moussavou-et-le-rhm-evincent-le-pdg-a-la-cour-constitutionnelle/" title="Maganga Moussavou et le RHM évincent le PDG à la Cour constitutionnelle">16 novembre 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>												</div>
+																					</div><!-- .post-content -->
+									</div><!-- .post-boxed -->
+								</div>
+															<div class="post-col">
+									<div class="post-boxed">
+																					<div class="post-img-wrap">
+												<a href="https://gabonactu.com/bataille-impitoyable-pour-le-pognon-de-la-coupe-du-monde/" class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2022/11/dollars-1.webp');"></a>
+												<div class="entry-meta category-meta">
+													<div class="cat-links">
+				<a class="cat-links-58" href="https://gabonactu.com/category/sports/">Sports</a>
+			</div>
+												</div><!-- .entry-meta -->
+											</div><!-- .post-img-wrap -->
+																				<div class="post-content">
+																						<h3 class="entry-title"><a href="https://gabonactu.com/bataille-impitoyable-pour-le-pognon-de-la-coupe-du-monde/">Bataille impitoyable pour le pognon de la coupe du monde</a></h3>																							<div class="entry-meta">
+													<div class="date"><a href="https://gabonactu.com/bataille-impitoyable-pour-le-pognon-de-la-coupe-du-monde/" title="Bataille impitoyable pour le pognon de la coupe du monde">16 novembre 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>												</div>
+																					</div><!-- .post-content -->
+									</div><!-- .post-boxed -->
+								</div>
+															<div class="post-col">
+									<div class="post-boxed">
+																					<div class="post-img-wrap">
+												<a href="https://gabonactu.com/journee-de-la-colere-et-de-lindignation-ce-mercredi-devant-la-cnss/" class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2022/11/CNSS-Ndi-Bekoung-2.jpeg');"></a>
+												<div class="entry-meta category-meta">
+													<div class="cat-links">
+				<a class="cat-links-57" href="https://gabonactu.com/category/societe/">Société</a>
+			</div>
+												</div><!-- .entry-meta -->
+											</div><!-- .post-img-wrap -->
+																				<div class="post-content">
+																						<h3 class="entry-title"><a href="https://gabonactu.com/journee-de-la-colere-et-de-lindignation-ce-mercredi-devant-la-cnss/">Journée de la colère et de l’indignation ce mercredi devant la CNSS</a></h3>																							<div class="entry-meta">
+													<div class="date"><a href="https://gabonactu.com/journee-de-la-colere-et-de-lindignation-ce-mercredi-devant-la-cnss/" title="Journée de la colère et de l’indignation ce mercredi devant la CNSS">15 novembre 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>												</div>
+																					</div><!-- .post-content -->
+									</div><!-- .post-boxed -->
+								</div>
+															<div class="post-col">
+									<div class="post-boxed">
+																					<div class="post-img-wrap">
+												<a href="https://gabonactu.com/coupe-du-monde-canal-gabon-annonce-la-retransmission-des-matchs-sur-gabon-1ere-en-hd-et-sur-son-offre-english-pack-dstv/" class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2022/11/Coupe-du-monde.jpg');"></a>
+												<div class="entry-meta category-meta">
+													<div class="cat-links">
+				<a class="cat-links-58" href="https://gabonactu.com/category/sports/">Sports</a>
+			</div>
+												</div><!-- .entry-meta -->
+											</div><!-- .post-img-wrap -->
+																				<div class="post-content">
+																						<h3 class="entry-title"><a href="https://gabonactu.com/coupe-du-monde-canal-gabon-annonce-la-retransmission-des-matchs-sur-gabon-1ere-en-hd-et-sur-son-offre-english-pack-dstv/">Coupe du monde : Canal+ Gabon annonce la retransmission des matchs sur Gabon 1<sup>ère</sup> en HD et sur son offre English Pack DSTV</a></h3>																							<div class="entry-meta">
+													<div class="date"><a href="https://gabonactu.com/coupe-du-monde-canal-gabon-annonce-la-retransmission-des-matchs-sur-gabon-1ere-en-hd-et-sur-son-offre-english-pack-dstv/" title="Coupe du monde : Canal+ Gabon annonce la retransmission des matchs sur Gabon 1ère en HD et sur son offre English Pack DSTV">15 novembre 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>												</div>
+																					</div><!-- .post-content -->
+									</div><!-- .post-boxed -->
+								</div>
+															<div class="post-col">
+									<div class="post-boxed">
+																					<div class="post-img-wrap">
+												<a href="https://gabonactu.com/fdcl-des-ouvrages-communautaires-pour-le-bien-etre-des-populations-du-departement-de-logooue-et-des-lacs-pres-de-lambarene/" class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2022/11/village.jpeg');"></a>
+												<div class="entry-meta category-meta">
+													<div class="cat-links">
+				<a class="cat-links-22" href="https://gabonactu.com/category/economie/">Economie</a>
+			</div>
+												</div><!-- .entry-meta -->
+											</div><!-- .post-img-wrap -->
+																				<div class="post-content">
+																						<h3 class="entry-title"><a href="https://gabonactu.com/fdcl-des-ouvrages-communautaires-pour-le-bien-etre-des-populations-du-departement-de-logooue-et-des-lacs-pres-de-lambarene/">FDCL : des ouvrages communautaires pour le bien-être des populations du département de l&rsquo;Ogooué et des Lacs, près de Lambaréné</a></h3>																							<div class="entry-meta">
+													<div class="date"><a href="https://gabonactu.com/fdcl-des-ouvrages-communautaires-pour-le-bien-etre-des-populations-du-departement-de-logooue-et-des-lacs-pres-de-lambarene/" title="FDCL : des ouvrages communautaires pour le bien-être des populations du département de l&rsquo;Ogooué et des Lacs, près de Lambaréné">15 novembre 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>												</div>
+																					</div><!-- .post-content -->
+									</div><!-- .post-boxed -->
+								</div>
+															<div class="post-col">
+									<div class="post-boxed">
+																					<div class="post-img-wrap">
+												<a href="https://gabonactu.com/gabon-bientot-un-manuel-de-procedures-pour-renforcer-le-controle-budgetaire-et-comptable-du-patrimoine-de-letat/" class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2022/11/Roboty-Mbou-1.jpeg');"></a>
+												<div class="entry-meta category-meta">
+													<div class="cat-links">
+				<a class="cat-links-22" href="https://gabonactu.com/category/economie/">Economie</a>
+			</div>
+												</div><!-- .entry-meta -->
+											</div><!-- .post-img-wrap -->
+																				<div class="post-content">
+																						<h3 class="entry-title"><a href="https://gabonactu.com/gabon-bientot-un-manuel-de-procedures-pour-renforcer-le-controle-budgetaire-et-comptable-du-patrimoine-de-letat/">Gabon : bientôt un manuel de procédures pour renforcer le contrôle budgétaire et comptable du patrimoine de l&rsquo;état</a></h3>																							<div class="entry-meta">
+													<div class="date"><a href="https://gabonactu.com/gabon-bientot-un-manuel-de-procedures-pour-renforcer-le-controle-budgetaire-et-comptable-du-patrimoine-de-letat/" title="Gabon : bientôt un manuel de procédures pour renforcer le contrôle budgétaire et comptable du patrimoine de l&rsquo;état">15 novembre 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>												</div>
+																					</div><!-- .post-content -->
+									</div><!-- .post-boxed -->
+								</div>
+															<div class="post-col">
+									<div class="post-boxed">
+																					<div class="post-img-wrap">
+												<a href="https://gabonactu.com/le-gabon-cree-une-societe-de-garantie-pour-permettre-aux-pme-dacceder-au-credit-bancaire/" class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2022/11/SGG-1.jpeg');"></a>
+												<div class="entry-meta category-meta">
+													<div class="cat-links">
+				<a class="cat-links-22" href="https://gabonactu.com/category/economie/">Economie</a>
+			</div>
+												</div><!-- .entry-meta -->
+											</div><!-- .post-img-wrap -->
+																				<div class="post-content">
+																						<h3 class="entry-title"><a href="https://gabonactu.com/le-gabon-cree-une-societe-de-garantie-pour-permettre-aux-pme-dacceder-au-credit-bancaire/">Le Gabon créé une société de garantie pour permettre aux PME d’accéder au crédit bancaire</a></h3>																							<div class="entry-meta">
+													<div class="date"><a href="https://gabonactu.com/le-gabon-cree-une-societe-de-garantie-pour-permettre-aux-pme-dacceder-au-credit-bancaire/" title="Le Gabon créé une société de garantie pour permettre aux PME d’accéder au crédit bancaire">15 novembre 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>												</div>
+																					</div><!-- .post-content -->
+									</div><!-- .post-boxed -->
+								</div>
+															<div class="post-col">
+									<div class="post-boxed">
+																					<div class="post-img-wrap">
+												<a href="https://gabonactu.com/beaute-une-gabonaise-en-finale-dans-un-concours-en-cote-divoire/" class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2022/11/wilma-2.jpeg');"></a>
+												<div class="entry-meta category-meta">
+													<div class="cat-links">
+				<a class="cat-links-57" href="https://gabonactu.com/category/societe/">Société</a>
+			</div>
+												</div><!-- .entry-meta -->
+											</div><!-- .post-img-wrap -->
+																				<div class="post-content">
+																						<h3 class="entry-title"><a href="https://gabonactu.com/beaute-une-gabonaise-en-finale-dans-un-concours-en-cote-divoire/">Beauté : une gabonaise en finale dans un concours en Côte d’Ivoire</a></h3>																							<div class="entry-meta">
+													<div class="date"><a href="https://gabonactu.com/beaute-une-gabonaise-en-finale-dans-un-concours-en-cote-divoire/" title="Beauté : une gabonaise en finale dans un concours en Côte d’Ivoire">14 novembre 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>												</div>
+																					</div><!-- .post-content -->
+									</div><!-- .post-boxed -->
+								</div>
+															<div class="post-col">
+									<div class="post-boxed">
+																					<div class="post-img-wrap">
+												<a href="https://gabonactu.com/championnats-du-monde-de-taekwondo-les-gabonais-decimes-en-une-journee/" class="post-img" style="background-image: url('https://gabonactu.com/wp-content/uploads/2022/11/Taekwondo-mexique.jpg');"></a>
+												<div class="entry-meta category-meta">
+													<div class="cat-links">
+				<a class="cat-links-58" href="https://gabonactu.com/category/sports/">Sports</a>
+			</div>
+												</div><!-- .entry-meta -->
+											</div><!-- .post-img-wrap -->
+																				<div class="post-content">
+																						<h3 class="entry-title"><a href="https://gabonactu.com/championnats-du-monde-de-taekwondo-les-gabonais-decimes-en-une-journee/">Championnats du monde de Taekwondo :  les gabonais décimés en une journée</a></h3>																							<div class="entry-meta">
+													<div class="date"><a href="https://gabonactu.com/championnats-du-monde-de-taekwondo-les-gabonais-decimes-en-une-journee/" title="Championnats du monde de Taekwondo :  les gabonais décimés en une journée">14 novembre 2022</a> </div> <div class="by-author vcard author"><a href="https://gabonactu.com/author/yveslaugoma/">Modérateur Modérateur</a> </div>												</div>
+																					</div><!-- .post-content -->
+									</div><!-- .post-boxed -->
+								</div>
+													</div><!-- .row -->
+											</div><!-- .container -->
+									</section><!-- .featured-stories -->
+			
+			
+				<div class="widget-area">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-6 col-lg-3">
+								
+		<section id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="widget-title">ACTULITÉS RÉCENTES</h3>
+		<ul>
+											<li>
+					<a href="https://gabonactu.com/black-friday-afrijet-casse-les-prix-sur-tous-ses-vols/">Black Friday : Afrijet casse les prix sur tous ses vols !</a>
+									</li>
+											<li>
+					<a href="https://gabonactu.com/maganga-moussavou-et-le-rhm-evincent-le-pdg-a-la-cour-constitutionnelle/">Maganga Moussavou et le RHM évincent le PDG à la Cour constitutionnelle</a>
+									</li>
+											<li>
+					<a href="https://gabonactu.com/bataille-impitoyable-pour-le-pognon-de-la-coupe-du-monde/">Bataille impitoyable pour le pognon de la coupe du monde</a>
+									</li>
+											<li>
+					<a href="https://gabonactu.com/journee-de-la-colere-et-de-lindignation-ce-mercredi-devant-la-cnss/">Journée de la colère et de l’indignation ce mercredi devant la CNSS</a>
+									</li>
+											<li>
+					<a href="https://gabonactu.com/coupe-du-monde-canal-gabon-annonce-la-retransmission-des-matchs-sur-gabon-1ere-en-hd-et-sur-son-offre-english-pack-dstv/">Coupe du monde : Canal+ Gabon annonce la retransmission des matchs sur Gabon 1<sup>ère</sup> en HD et sur son offre English Pack DSTV</a>
+									</li>
+					</ul>
+
+		</section>							</div><!-- footer sidebar column 1 -->
+							<div class="col-sm-6 col-lg-3">
+								<section id="calendar-5" class="widget widget_calendar"><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar" class="wp-calendar-table">
+	<caption>novembre 2022</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="lundi">L</th>
+		<th scope="col" title="mardi">M</th>
+		<th scope="col" title="mercredi">M</th>
+		<th scope="col" title="jeudi">J</th>
+		<th scope="col" title="vendredi">V</th>
+		<th scope="col" title="samedi">S</th>
+		<th scope="col" title="dimanche">D</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td colspan="1" class="pad">&nbsp;</td><td><a href="https://gabonactu.com/2022/11/01/" aria-label="Publications publiées sur 1 November 2022">1</a></td><td><a href="https://gabonactu.com/2022/11/02/" aria-label="Publications publiées sur 2 November 2022">2</a></td><td><a href="https://gabonactu.com/2022/11/03/" aria-label="Publications publiées sur 3 November 2022">3</a></td><td><a href="https://gabonactu.com/2022/11/04/" aria-label="Publications publiées sur 4 November 2022">4</a></td><td>5</td><td><a href="https://gabonactu.com/2022/11/06/" aria-label="Publications publiées sur 6 November 2022">6</a></td>
+	</tr>
+	<tr>
+		<td><a href="https://gabonactu.com/2022/11/07/" aria-label="Publications publiées sur 7 November 2022">7</a></td><td><a href="https://gabonactu.com/2022/11/08/" aria-label="Publications publiées sur 8 November 2022">8</a></td><td><a href="https://gabonactu.com/2022/11/09/" aria-label="Publications publiées sur 9 November 2022">9</a></td><td><a href="https://gabonactu.com/2022/11/10/" aria-label="Publications publiées sur 10 November 2022">10</a></td><td><a href="https://gabonactu.com/2022/11/11/" aria-label="Publications publiées sur 11 November 2022">11</a></td><td><a href="https://gabonactu.com/2022/11/12/" aria-label="Publications publiées sur 12 November 2022">12</a></td><td><a href="https://gabonactu.com/2022/11/13/" aria-label="Publications publiées sur 13 November 2022">13</a></td>
+	</tr>
+	<tr>
+		<td><a href="https://gabonactu.com/2022/11/14/" aria-label="Publications publiées sur 14 November 2022">14</a></td><td><a href="https://gabonactu.com/2022/11/15/" aria-label="Publications publiées sur 15 November 2022">15</a></td><td id="today"><a href="https://gabonactu.com/2022/11/16/" aria-label="Publications publiées sur 16 November 2022">16</a></td><td>17</td><td>18</td><td>19</td><td>20</td>
+	</tr>
+	<tr>
+		<td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td>
+	</tr>
+	<tr>
+		<td>28</td><td>29</td><td>30</td>
+		<td class="pad" colspan="4">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table><nav aria-label="Mois précédents et suivants" class="wp-calendar-nav">
+		<span class="wp-calendar-nav-prev"><a href="https://gabonactu.com/2022/10/">&laquo; Oct</a></span>
+		<span class="pad">&nbsp;</span>
+		<span class="wp-calendar-nav-next">&nbsp;</span>
+	</nav></div></section>							</div><!-- footer sidebar column 2 -->
+															<div class="col-sm-6 col-lg-3">
+									<section id="recent-comments-4" class="widget widget_recent_comments"><h3 class="widget-title">COMMENTAIRES RÉCENTS</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Emma OLIVEIRA</span> dans <a href="https://gabonactu.com/beaute-une-gabonaise-en-finale-dans-un-concours-en-cote-divoire/#comment-12955">Beauté : une gabonaise en finale dans un concours en Côte d’Ivoire</a></li><li class="recentcomments"><span class="comment-author-link"><a href='https://ga.loozap.com' rel='external nofollow ugc' class='url'>Loozap</a></span> dans <a href="https://gabonactu.com/les-francais-du-gabon-ont-egalement-commemore-larmistice/#comment-12946">Les français du Gabon ont également commémoré l’armistice</a></li><li class="recentcomments"><span class="comment-author-link">Ike Rigal Makanga</span> dans <a href="https://gabonactu.com/le-pmug-lance-www-pmug-ga-un-site-interne-moderne-pour-des-paris-en-ligne-et-des-gains-instantanes/#comment-12930">Le PMUG lance <a href="http://www.pmug.ga">www.pmug.ga</a>, un site interne moderne pour des paris en ligne et des gains instantanés</a></li><li class="recentcomments"><span class="comment-author-link">Mavoungou terrance vyrain</span> dans <a href="https://gabonactu.com/la-cgsl-denonce-les-licenciements-abusifs-des-delegues-syndicaux-a-pieces-equipauto/#comment-12923">La CGSL dénonce les licenciements abusifs des délégués syndicaux à PIECES EQUIP’AUTO</a></li><li class="recentcomments"><span class="comment-author-link">Mouhamed Traore</span> dans <a href="https://gabonactu.com/transport-maritime-vers-une-augmentation-du-prix-du-billet-libreville-port-gentil/#comment-12897">Transport maritime : vers une augmentation du prix du billet Libreville-Port-Gentil</a></li></ul></section>								</div><!-- footer sidebar column 3 -->
+																	<div class="col-sm-6 col-lg-3">
+										<section id="sfsi-widget-3" class="widget sfsi">		<div class="sfsi_widget" data-position="widget" style="display:flex;flex-wrap:wrap;justify-content: left">
+			<div id='sfsi_wDiv'></div>
+			<div class="norm_row sfsi_wDiv "  style="width:225px;position:absolute;;text-align:left"><div style='width:40px; height:40px;margin-left:5px;margin-bottom:5px; ' class='sfsi_wicons shuffeldiv ' ><div class='inerCnt'><a class=' sficn' data-effect='' target='_blank'  href='' id='sfsiid_facebook_icon' style='width:40px;height:40px;opacity:1;background:#336699;'  ><img data-pin-nopin='true' alt='Facebook' title='Facebook' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/icons_theme/flat/flat_facebook.png' width='40' height='40' style='' class='sfcm sfsi_wicon ' data-effect=''   /></a><div class="sfsi_tool_tip_2 fb_tool_bdr sfsiTlleft" style="opacity:0;z-index:-1;" id="sfsiid_facebook"><span class="bot_arow bot_fb_arow"></span><div class="sfsi_inside"><div  class='icon2'><div class="fb-like" data-href="https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div></div><div  class='icon3'><a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur' style='display:inline-block;'  > <img class='sfsi_wicon'  data-pin-nopin='true' alt='fb-share-icon' title='Facebook Share' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/share_icons/fb_icons/en_US.svg' /></a></div></div></div></div></div><div style='width:40px; height:40px;margin-left:5px;margin-bottom:5px; ' class='sfsi_wicons shuffeldiv ' ><div class='inerCnt'><a class=' sficn' data-effect='' target='_blank'  href='' id='sfsiid_twitter_icon' style='width:40px;height:40px;opacity:1;background:#00ACEC;'  ><img data-pin-nopin='true' alt='Twitter' title='Twitter' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/icons_theme/flat/flat_twitter.png' width='40' height='40' style='' class='sfcm sfsi_wicon ' data-effect=''   /></a><div class="sfsi_tool_tip_2 twt_tool_bdr sfsiTlleft" style="opacity:0;z-index:-1;" id="sfsiid_twitter"><span class="bot_arow bot_twt_arow"></span><div class="sfsi_inside"><div  class='icon2'><div class='sf_twiter' style='display: inline-block;vertical-align: middle;width: auto;'>
+						<a target='_blank' href='https://twitter.com/intent/tweet?text=Hey%2C+check+out+this+cool+site+I+found%3A+www.yourname.com+%23Topic+via%40my_twitter_name+https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur' style='display:inline-block' >
+							<img data-pin-nopin= true class='sfsi_wicon' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/share_icons/Twitter_Tweet/en_US_Tweet.svg' alt='Tweet' title='Tweet' >
+						</a>
+					</div></div></div></div></div></div><div style='width:40px; height:40px;margin-left:5px;margin-bottom:5px; ' class='sfsi_wicons shuffeldiv ' ><div class='inerCnt'><a class=' sficn' data-effect='' target='_blank'  href='' id='sfsiid_linkedin_icon' style='width:40px;height:40px;opacity:1;background:#0877B5;'  ><img data-pin-nopin='true' alt='LinkedIn' title='LinkedIn' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/icons_theme/flat/flat_linkedin.png' width='40' height='40' style='' class='sfcm sfsi_wicon ' data-effect=''   /></a><div class="sfsi_tool_tip_2 linkedin_tool_bdr sfsiTlleft" style="opacity:0;z-index:-1;" id="sfsiid_linkedin"><span class="bot_arow bot_linkedin_arow"></span><div class="sfsi_inside"><div  class='icon2'><a target='_blank' href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fgabonactu.com%2Fescroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur"><img class="sfsi_wicon" data-pin-nopin= true alt="Share" title="Share" src="https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/share_icons/Linkedin_Share/en_US_share.svg" /></a></div></div></div></div></div><div style='width:40px; height:40px;margin-left:5px;margin-bottom:5px; ' class='sfsi_wicons shuffeldiv ' ><div class='inerCnt'><a class=' sficn' data-effect='' target='_blank'  href='https://www.instagram.com/gabonactu/' id='sfsiid_instagram_icon' style='width:40px;height:40px;opacity:1;background:radial-gradient(circle farthest-corner at 35% 90%, #fec564, rgba(0, 0, 0, 0) 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, rgba(0, 0, 0, 0)), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);'  ><img data-pin-nopin='true' alt='Instagram' title='Instagram' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/icons_theme/flat/flat_instagram.png' width='40' height='40' style='' class='sfcm sfsi_wicon ' data-effect=''   /></a></div></div><div style='width:40px; height:40px;margin-left:5px;margin-bottom:5px; ' class='sfsi_wicons shuffeldiv ' ><div class='inerCnt'><a class=' sficn' data-effect='' target='_blank'  href='https://api.whatsapp.com/send?text=https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/' id='sfsiid_whatsapp_icon' style='width:40px;height:40px;opacity:1;background:#3ED946;'  ><img data-pin-nopin='true' alt='WhatsApp' title='WhatsApp' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/icons_theme/flat/flat_whatsapp.png' width='40' height='40' style='' class='sfcm sfsi_wicon ' data-effect=''   /></a></div></div></div ><div id="sfsi_holder" class="sfsi_holders" style="position: relative; float: left;width:100%;z-index:-1;"></div ><script type="rocketlazyloadscript">window.addEventListener("sfsi_functions_loaded", function()
+			{
+				if (typeof sfsi_widget_set == "function") {
+					sfsi_widget_set();
+				}
+			}); </script>			<div style="clear: both;"></div>
+		</div>
+	</section><section id="newscard_advertisement_widget-9" class="widget newscard-widget-ad"></section><!-- .newscard-widget-ad --><section id="custom_html-10" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="sas_53614"></div>
+<script type="rocketlazyloadscript" data-rocket-type="application/javascript">
+    sas.cmd.push(function() {
+        sas.render("53614");  // Format : Interstitiel 0x0
+    });
+</script></div></section><section id="block-12" class="widget widget_block"><script type="rocketlazyloadscript">(function() {
+	window.mc4wp = window.mc4wp || {
+		listeners: [],
+		forms: {
+			on: function(evt, cb) {
+				window.mc4wp.listeners.push(
+					{
+						event   : evt,
+						callback: cb
+					}
+				);
+			}
+		}
+	}
+})();
+</script><!-- Mailchimp for WordPress v4.8.11 - https://wordpress.org/plugins/mailchimp-for-wp/ --><form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-81167" method="post" data-id="81167" data-name="diffusion" ><div class="mc4wp-form-fields"><p>
+	<label>Bonjour ! merci de vous abonner à notre newsletter
+		<input type="email" name="EMAIL" placeholder="Entrez votre adresse e-mail" required />
+</label>
+</p>
+
+<p>
+	<input type="submit" value="Abonnez-vous" />
+</p></div><label style="display: none !important;">Laissez ce champ vide si vous êtes humain : <input type="text" name="_mc4wp_honeypot" value="" tabindex="-1" autocomplete="off" /></label><input type="hidden" name="_mc4wp_timestamp" value="1668609050" /><input type="hidden" name="_mc4wp_form_id" value="81167" /><input type="hidden" name="_mc4wp_form_element_id" value="mc4wp-form-1" /><div class="mc4wp-response"></div></form><!-- / Mailchimp for WordPress Plugin --></section>									</div><!-- footer sidebar column 4 -->
+														</div><!-- .row -->
+					</div><!-- .container -->
+				</div><!-- .widget-area -->
+			
+							<div class="site-info">
+					<div class="container">
+						<div class="row">
+															<div class="col-lg-auto order-lg-2 ml-auto">
+									<div class="social-profiles">
+										
+		<ul class="clearfix">
+							<li><a target="_blank" href="https://www.facebook.com/gabonactu.co"></a></li>
+					</ul>
+										</div>
+								</div>
+													</div><!-- .row -->
+					</div><!-- .container -->
+				</div><!-- .site-info -->
+					</footer><!-- #colophon -->
+		<div class="back-to-top"><a title="Go to Top" href="#masthead"></a></div>
+</div><!-- #page -->
+
+<div class="sfsi_outr_div"><div class="sfsi_FrntInner_chg" style="background-color:#eff7f7;border:1px solid#f3faf2; font-style:;color:#000000;box-shadow:12px 30px 18px #CCCCCC;"><div class="sfsiclpupwpr" onclick="sfsihidemepopup();"><img src="https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/close.png" alt="error" /></div><h2 style="font-family:Helvetica,Arial,sans-serif;font-style:;color:#000000;font-size:30px">Vous aimez l'article? Merci de le partager.</h2><ul style="margin-bottom:0px"><li><div style='width:51px; height:51px;margin-left:5px;margin-bottom:5px; ' class='sfsi_wicons ' ><div class='inerCnt'><a class=' sficn' data-effect='' target='_blank'  href='' id='sfsiid_facebook_icon' style='width:51px;height:51px;opacity:1;background:#336699;'  ><img data-pin-nopin='true' alt='Facebook' title='Facebook' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/icons_theme/flat/flat_facebook.png' width='51' height='51' style='' class='sfcm sfsi_wicon ' data-effect=''   /></a><div class="sfsi_tool_tip_2 fb_tool_bdr sfsiTlleft" style="opacity:0;z-index:-1;" id="sfsiid_facebook"><span class="bot_arow bot_fb_arow"></span><div class="sfsi_inside"><div  class='icon2'><div class="fb-like" data-href="https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div></div><div  class='icon3'><a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur' style='display:inline-block;'  > <img class='sfsi_wicon'  data-pin-nopin='true' alt='fb-share-icon' title='Facebook Share' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/share_icons/fb_icons/en_US.svg' /></a></div></div></div></div></div></li><li><div style='width:51px; height:51px;margin-left:5px;margin-bottom:5px; ' class='sfsi_wicons ' ><div class='inerCnt'><a class=' sficn' data-effect='' target='_blank'  href='' id='sfsiid_twitter_icon' style='width:51px;height:51px;opacity:1;background:#00ACEC;'  ><img data-pin-nopin='true' alt='Twitter' title='Twitter' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/icons_theme/flat/flat_twitter.png' width='51' height='51' style='' class='sfcm sfsi_wicon ' data-effect=''   /></a><div class="sfsi_tool_tip_2 twt_tool_bdr sfsiTlleft" style="opacity:0;z-index:-1;" id="sfsiid_twitter"><span class="bot_arow bot_twt_arow"></span><div class="sfsi_inside"><div  class='icon2'><div class='sf_twiter' style='display: inline-block;vertical-align: middle;width: auto;'>
+						<a target='_blank' href='https://twitter.com/intent/tweet?text=Hey%2C+check+out+this+cool+site+I+found%3A+www.yourname.com+%23Topic+via%40my_twitter_name+https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur' style='display:inline-block' >
+							<img data-pin-nopin= true class='sfsi_wicon' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/share_icons/Twitter_Tweet/en_US_Tweet.svg' alt='Tweet' title='Tweet' >
+						</a>
+					</div></div></div></div></div></div></li><li><div style='width:51px; height:51px;margin-left:5px;margin-bottom:5px; ' class='sfsi_wicons ' ><div class='inerCnt'><a class=' sficn' data-effect='' target='_blank'  href='' id='sfsiid_linkedin_icon' style='width:51px;height:51px;opacity:1;background:#0877B5;'  ><img data-pin-nopin='true' alt='LinkedIn' title='LinkedIn' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/icons_theme/flat/flat_linkedin.png' width='51' height='51' style='' class='sfcm sfsi_wicon ' data-effect=''   /></a><div class="sfsi_tool_tip_2 linkedin_tool_bdr sfsiTlleft" style="opacity:0;z-index:-1;" id="sfsiid_linkedin"><span class="bot_arow bot_linkedin_arow"></span><div class="sfsi_inside"><div  class='icon2'><a target='_blank' href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fgabonactu.com%2Fescroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur"><img class="sfsi_wicon" data-pin-nopin= true alt="Share" title="Share" src="https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/share_icons/Linkedin_Share/en_US_share.svg" /></a></div></div></div></div></div></li><li><div style='width:51px; height:51px;margin-left:5px;margin-bottom:5px; ' class='sfsi_wicons ' ><div class='inerCnt'><a class=' sficn' data-effect='' target='_blank'  href='https://www.instagram.com/gabonactu/' id='sfsiid_instagram_icon' style='width:51px;height:51px;opacity:1;background:radial-gradient(circle farthest-corner at 35% 90%, #fec564, rgba(0, 0, 0, 0) 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, rgba(0, 0, 0, 0)), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);'  ><img data-pin-nopin='true' alt='Instagram' title='Instagram' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/icons_theme/flat/flat_instagram.png' width='51' height='51' style='' class='sfcm sfsi_wicon ' data-effect=''   /></a></div></div></li><li><div style='width:51px; height:51px;margin-left:5px;margin-bottom:5px; ' class='sfsi_wicons ' ><div class='inerCnt'><a class=' sficn' data-effect='' target='_blank'  href='https://api.whatsapp.com/send?text=https://gabonactu.com/escroquerie-supposee-dairtel-money-a-mitzic-les-clarifications-de-loperateur/' id='sfsiid_whatsapp_icon' style='width:51px;height:51px;opacity:1;background:#3ED946;'  ><img data-pin-nopin='true' alt='WhatsApp' title='WhatsApp' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/images/icons_theme/flat/flat_whatsapp.png' width='51' height='51' style='' class='sfcm sfsi_wicon ' data-effect=''   /></a></div></div></li></ul></div></div><script type="rocketlazyloadscript">
+
+window.addEventListener('sfsi_functions_loaded', function() {
+    if (typeof sfsi_time_pop_up == 'function') {
+        sfsi_time_pop_up(10000);
+    }
+})
+</script>
+    <script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('sfsi_functions_loaded', function() {
+            if (typeof sfsi_plugin_version == 'function') {
+                sfsi_plugin_version(2.77);
+            }
+        });
+
+        function sfsi_processfurther(ref) {
+            var feed_id = 'a0RnalJMQUFFNVRuODJ1MTVmNFpLeWJZMUdNM3gxekM5UE1meldjL1hhYkxGajlzUFFqcTk5MVJXY3pKbkxpU3VucEplRm5hek9UcUJxb2pxOGo4aGpuTlh2MmdUOXZ6bjJlSG9obTAxdXlXMlVsd2Q3T0FHWEdLOGdmOWpkREV8RDhhVkNxSEdLdlo1UzB3SnZKOUM5UWttWWZ4U2hPcGtoME1LblE3eTlMWT0=';
+            var feedtype = 8;
+            var email = jQuery(ref).find('input[name="email"]').val();
+            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if ((email != "Enter your email") && (filter.test(email))) {
+                if (feedtype == "8") {
+                    var url = "https://api.follow.it/subscription-form/" + feed_id + "/" + feedtype;
+                    window.open(url, "popupwindow", "scrollbars=yes,width=1080,height=760");
+                    return true;
+                }
+            } else {
+                alert("Please enter email address");
+                jQuery(ref).find('input[name="email"]').focus();
+                return false;
+            }
+        }
+    });</script>
+    <style type="text/css" aria-selected="true">
+        .sfsi_subscribe_Popinner {
+            width: 100% !important;
+
+            height: auto !important;
+
+            padding: 18px 0px !important;
+
+            background-color: #ffffff !important;
+        }
+        .sfsi_subscribe_Popinner form {
+            margin: 0 20px !important;
+        }
+        .sfsi_subscribe_Popinner h5 {
+            font-family: Helvetica,Arial,sans-serif !important;
+
+            font-weight: bold !important;
+
+            color: #000000 !important;
+
+            font-size: 16px !important;
+
+            text-align: center !important;
+            margin: 0 0 10px !important;
+            padding: 0 !important;
+        }
+        .sfsi_subscription_form_field {
+            margin: 5px 0 !important;
+            width: 100% !important;
+            display: inline-flex;
+            display: -webkit-inline-flex;
+        }
+
+        .sfsi_subscription_form_field input {
+            width: 100% !important;
+            padding: 10px 0px !important;
+        }
+
+        .sfsi_subscribe_Popinner input[type=email] {
+            font-family: Helvetica,Arial,sans-serif !important;
+
+            font-style: normal !important;
+
+            color:  !important;
+
+            font-size: 14px !important;
+
+            text-align: center !important;
+        }
+
+        .sfsi_subscribe_Popinner input[type=email]::-webkit-input-placeholder {
+
+            font-family: Helvetica,Arial,sans-serif !important;
+
+            font-style: normal !important;
+
+            color:  !important;
+
+            font-size: 14px !important;
+
+            text-align: center !important;
+        }
+        .sfsi_subscribe_Popinner input[type=email]:-moz-placeholder {
+            /* Firefox 18- */
+
+            font-family: Helvetica,Arial,sans-serif !important;
+
+            font-style: normal !important;
+
+            color:  !important;
+
+            font-size: 14px !important;
+
+            text-align: center !important;
+
+        }
+
+        .sfsi_subscribe_Popinner input[type=email]::-moz-placeholder {
+            /* Firefox 19+ */
+            font-family: Helvetica,Arial,sans-serif !important;
+
+            font-style: normal !important;
+
+            color:  !important;
+
+            font-size: 14px !important;
+
+            text-align: center !important;
+
+        }
+
+        .sfsi_subscribe_Popinner input[type=email]:-ms-input-placeholder {
+            font-family: Helvetica,Arial,sans-serif !important;
+
+            font-style: normal !important;
+
+            color:  !important;
+
+            font-size: 14px !important;
+
+            text-align: center !important;
+        }
+
+        .sfsi_subscribe_Popinner input[type=submit] {
+            font-family: Helvetica,Arial,sans-serif !important;
+
+            font-weight: bold !important;
+
+            color: #000000 !important;
+
+            font-size: 16px !important;
+
+            text-align: center !important;
+
+            background-color: #dedede !important;
+        }
+
+        .sfsi_shortcode_container {
+            float: left;
+        }
+
+        .sfsi_shortcode_container .norm_row .sfsi_wDiv {
+            position: relative !important;
+        }
+
+        .sfsi_shortcode_container .sfsi_holders {
+            display: none;
+        }
+
+            </style>
+
+<script type="rocketlazyloadscript">(function() {function maybePrefixUrlField() {
+	if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
+		this.value = "http://" + this.value;
+	}
+}
+
+var urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]');
+if (urlFields) {
+	for (var j=0; j < urlFields.length; j++) {
+		urlFields[j].addEventListener('blur', maybePrefixUrlField);
+	}
+}
+})();</script><script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2' id='jquery-ui-core-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/js/shuffle/modernizr.custom.min.js?ver=6.1.1' id='SFSIjqueryModernizr-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/js/shuffle/jquery.shuffle.min.js?ver=6.1.1' id='SFSIjqueryShuffle-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/js/shuffle/random-shuffle-min.js?ver=6.1.1' id='SFSIjqueryrandom-shuffle-js' defer></script>
+<script type='text/javascript' id='SFSICustomJs-js-extra'>
+/* <![CDATA[ */
+var sfsi_icon_ajax_object = {"ajax_url":"https:\/\/gabonactu.com\/wp-admin\/admin-ajax.php","plugin_url":"https:\/\/gabonactu.com\/wp-content\/plugins\/ultimate-social-media-icons\/"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/js/custom.js?ver=2.7.8' id='SFSICustomJs-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/gabonactu.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/bootstrap/js/popper.min.js?ver=1.12.9' id='popper-script-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/bootstrap/js/bootstrap.min.js?ver=4.0.0' id='bootstrap-script-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/owl-carousel/owl.carousel.min.js?ver=2.3.4' id='owl-carousel-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/owl-carousel/owl.carousel-settings.js?ver=6.1.1' id='newscard-owl-carousel-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/matchHeight/jquery.matchHeight-min.js?ver=0.7.2' id='jquery-match-height-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/matchHeight/jquery.matchHeight-settings.js?ver=6.1.1' id='newscard-match-height-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/js/skip-link-focus-fix.js?ver=20151215' id='newscard-skip-link-focus-fix-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-includes/js/comment-reply.min.js?ver=6.1.1' id='comment-reply-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/sticky/jquery.sticky.js?ver=1.0.4' id='jquery-sticky-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/sticky/jquery.sticky-settings.js?ver=6.1.1' id='newscard-jquery-sticky-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/themes/newscard-pro/assets/js/scripts.js?ver=6.1.1' id='newscard-scripts-js' defer></script>
+<script type="rocketlazyloadscript" defer data-rocket-type='text/javascript' src='https://gabonactu.com/wp-content/plugins/akismet/_inc/akismet-frontend.js?ver=1666197892' id='akismet-frontend-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' defer src='https://gabonactu.com/wp-content/plugins/mailchimp-for-wp/assets/js/forms.js?ver=4.8.11' id='mc4wp-forms-api-js'></script>
+<!--noptimize--><script type="rocketlazyloadscript">!function(){window.advanced_ads_ready_queue=window.advanced_ads_ready_queue||[],advanced_ads_ready_queue.push=window.advanced_ads_ready;for(var d=0,a=advanced_ads_ready_queue.length;d<a;d++)advanced_ads_ready(advanced_ads_ready_queue[d])}();</script><!--/noptimize-->
+<script type="rocketlazyloadscript">"use strict";var wprRemoveCPCSS=function wprRemoveCPCSS(){var elem;document.querySelector('link[data-rocket-async="style"][rel="preload"]')?setTimeout(wprRemoveCPCSS,200):(elem=document.getElementById("rocket-critical-css"))&&"remove"in elem&&elem.remove()};window.addEventListener?window.addEventListener("load",wprRemoveCPCSS):window.attachEvent&&window.attachEvent("onload",wprRemoveCPCSS);</script><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A300%2C300i%2C400%2C400i%2C500%2C500i%2C700%2C700i&#038;display=swap" /><link rel='stylesheet' id='wp-block-library-css' href='https://gabonactu.com/wp-includes/css/dist/block-library/style.min.css?ver=6.1.1' type='text/css' media='all' /><link rel='stylesheet' id='classic-theme-styles-css' href='https://gabonactu.com/wp-includes/css/classic-themes.min.css?ver=1' type='text/css' media='all' /><link rel='stylesheet' id='SFSImainCss-css' href='https://gabonactu.com/wp-content/plugins/ultimate-social-media-icons/css/sfsi-style.css?ver=2.7.8' type='text/css' media='all' /><link rel='stylesheet' id='bootstrap-style-css' href='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/bootstrap/css/bootstrap.min.css?ver=4.0.0' type='text/css' media='all' /><link rel='stylesheet' id='font-awesome-style-css' href='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/font-awesome/css/font-awesome.css?ver=6.1.1' type='text/css' media='all' /><link rel='stylesheet' id='owl-carousel-css' href='https://gabonactu.com/wp-content/themes/newscard-pro/assets/library/owl-carousel/owl.carousel.min.css?ver=2.3.4' type='text/css' media='all' /><link rel='stylesheet' id='newscard-style-css' href='https://gabonactu.com/wp-content/themes/newscard-pro/style.css?ver=6.1.1' type='text/css' media='all' /></noscript></body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->

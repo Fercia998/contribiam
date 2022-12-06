@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+
+}
+
+body{
+    height: 100vh;
+    background-image: url(/img/Getty.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+
+}
+.grande{
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.11);
+    width: 100%;
+}
+
+.lego{
+
+    height: 400px;
+    margin-top: -7vw;
+    margin-left: -2vw;
+}
+.legi{
+    margin-left: 20px;
+}
+
+h1{
+    color: white;
+    width: 40%;
+    position: absolute;
+    top: 25vw;
+    left: 35vw;
+
+}
+button{
+    background: linear-gradient(135deg,#00C4FF,#9D1BB2);
+    color: white;
+    height: 3vw;
+    border-radius: 6px;
+    font-size: 18px;
+    position: absolute;
+    top:33vw ;
+    left: 35vw;
+    border: none;
+
+}
+.run{
+    text-decoration: none;
+    color: white;
+}
+@media only screen and (max-width:600px) {
+    *{
+        margin: 0;
+    }
+    
+    body{
+        height: 100vh;
+        background-image: url(/img/Getty.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        text-align: center;
+        align-items: center;
+        display: flex;text-decoration: none;
+        font-family: "Montserrat", sans-serif;
+
+    }
+    .grande{
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.548);
+        width: 100%;
+    }
+    .run{
+        text-decoration: none;
+        color: white;
+    }
+    
+    h1{
+        color: white;
+        width: 90%;
+        position: absolute;
+        top: 100vw;
+        left: 5vw;
+    
+    }
+    .lego{
+
+        margin-left: -13vw;
+        height: 400px;
+        margin-top: 10vw;
+    }
+    button{
+        background-color: rgba(128, 0, 128, 0.973);
+        color: white;
+        height: 15vw;
+        border-radius: 6px;
+        font-size: 22px;
+        position: absolute;
+        top:140vw ;
+        border: none;
+        margin-left: -10vw;
+}
+}

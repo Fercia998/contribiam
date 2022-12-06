@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+
+*{
+    margin: 0;
+    text-decoration: none;
+    font-family: "Open Sans", sans-serif
+
+}
+
+.mere{
+    width: 100%;
+    height: 100vh;
+    background-image: url(/);
+    background-repeat: none;
+    background-size: cover;
+    display: flex;
+    
+}
+.enfant{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.863);
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+}
+.child2{
+    display: flex;
+    align-items: center;
+    margin-top: 20vw;
+    flex-direction: column;
+
+}
+.lega{
+    height: 150px;
+    margin-top: -20vw;
+  }
+
+.child2 img{
+    height: 250px;
+}
+@media (max-width: 768px){
+    *{
+        margin: 0;
+        text-decoration: none;
+        font-family: "Open Sans", sans-serif
+    
+    }
+    
+    .mere{
+        width: 100%;
+        height: 100vh;
+        background-image: url(/);
+        background-repeat: none;
+        background-size: cover;
+        display: flex;
+        
+    }
+    .enfant{
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.863);
+        display: flex;
+        flex-direction: column;
+        color: white;
+        align-items: center;
+    }
+    .child2{
+        display: flex;
+        align-items: center;
+        margin-top: 50vw;
+        flex-direction: column;
+        text-align: center;
+    
+    }
+    .child2 img{
+        height: 250px;
+    }
+    .lega{
+        margin-left: -35vw;
+        margin-top: -60vw;
+        height: 150px;
+      }
+    
+}
